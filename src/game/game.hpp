@@ -47,27 +47,25 @@ private:
 
     Printer* printer;
 
-    std::vector<std::array<int, 2>> snake;
+    std::vector<std::array<int, 2>> m_snake;
 
-    std::array<int, 2> food;
+    std::array<int, 2> m_food;
 
-    const int frame_rate = 10;
-    const int game_space_x = 100;
-    const int game_space_y = 45;
+    const int k_frame_rate = 10;
+    const int k_game_space_x = 100;
+    const int k_game_space_y = 45;
 
-    int points;
-    int high_score;
-    int snake_dir;
+    int m_points;
+    int m_high_score;
+    int m_snake_dir;
 
 private:
-
+    void GenerateSnake();
+    void GenerateFood();
     void MoveSnake();
     bool FoodCollision();
-    void GenerateFood();
     void IncreaseSnakeSize();
     bool CollisionDetect();
-
-
 };
 
 } // NAMESPACE SNAKE

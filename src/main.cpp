@@ -20,8 +20,13 @@
 // SEE THE LICENSE FOR THE SPECIFIC LANGUAGE GOVERNING PERMISSIONS AND
 // LIMITATIONS UNDER THE LICENSE.
 
+#include "./game/game.hpp"
 
 int main(int argc, char** argv) {
+
+    bocan::snake::Game game = bocan::snake::Game();
+
+    game.Start();
 
     return 0;
 }

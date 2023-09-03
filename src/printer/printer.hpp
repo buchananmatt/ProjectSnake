@@ -29,11 +29,22 @@ namespace bocan {
 
 namespace snake {
 
+enum user_input {
+    DIRECTION_UP,
+    DIRECTION_DOWN,
+    DIRECTION_LEFT,
+    DIRECTION_RIGHT,
+    ENTER,
+    QUIT,
+    ERROR
+};
+
 class Printer {
 public:
     Printer();
     ~Printer();
 
+    void SetupScreen();
     void RefreshScreen();
     void RefreshGameSpace();
     void RefreshPoints();
@@ -41,7 +52,7 @@ public:
     void StartGame();
     void EndGame();
 
-    void GetUserInput();
+    int GetUserInput();
 
 private:
 
@@ -51,6 +62,11 @@ private:
     WINDOW* win_game_space;
 
 private:
+
+    void PrintTitle();
+    void PrintHighScore();
+    void PrintPoints();
+    void PrintGameSpace();
 
 };
 
