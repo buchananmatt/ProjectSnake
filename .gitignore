@@ -26,4 +26,8 @@
 *.a
 *.lib
 
+# macOS files
 *.DS_Store
+
+# VS Code files
+*.vscode
