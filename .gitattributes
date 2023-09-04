@@ -1,13 +1,14 @@
 
 # IGNORE ALL DOXYGEN GENERATED FILES
-# *.html
-# *.css
-# *.js
-# *.svg
-# *.png
-# *.tex
-# *.sty
+*.html linguist-vendored
+*.css linguist-vendored
+*.js linguist-vendored
+*.svg linguist-vendored
+*.png linguist-vendored
+*.tex linguist-vendored
+*.sty linguist-vendored
 
+#IGNORE ALL DOXYGEN DIRECTORIES
 ./html/* linguist-vendored
 ./latex/* linguist-vendored
 ./doc/html/* linguist-vendored
