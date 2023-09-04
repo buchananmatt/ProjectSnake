@@ -6,6 +6,9 @@
 //
 // GITHUB REPOSITORY https://github.com/buchananmatt/ProjectSnake.git
 //
+// THIS PROJECT IS DOCUMENTED WITH DOXYGEN. SEE DOCUMENTATION AT BELOW SITE.
+// https://htmlpreview.github.io/?https://github.com/buchananmatt/ProjectSnake/blob/master/doc/html/index.html
+//
 // COPYRIGHT [2023] [MATTHEW T. BUCHANAN] [BOCAN SOFTWARE]
 //
 // LICENSED UNDER THE APACHE LICENSE, VERSION 2.0 (THE "LICENSE");

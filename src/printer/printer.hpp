@@ -6,6 +6,9 @@
 //
 // GITHUB REPOSITORY https://github.com/buchananmatt/ProjectSnake.git
 //
+// THIS PROJECT IS DOCUMENTED WITH DOXYGEN. SEE DOCUMENTATION AT BELOW SITE.
+// https://htmlpreview.github.io/?https://github.com/buchananmatt/ProjectSnake/blob/master/doc/html/index.html
+//
 // COPYRIGHT [2023] [MATTHEW T. BUCHANAN] [BOCAN SOFTWARE]
 //
 // LICENSED UNDER THE APACHE LICENSE, VERSION 2.0 (THE "LICENSE");
@@ -25,26 +28,32 @@
 
 #include <ncurses.h>
 
+class vector;
+
 namespace bocan {
 
 namespace snake {
 
 enum user_input {
+    QUIT = 0,
+    NO,
+    YES,
     DIRECTION_UP,
     DIRECTION_DOWN,
     DIRECTION_LEFT,
     DIRECTION_RIGHT,
     ENTER,
-    QUIT,
     ERROR
 };
 
 class Printer {
 public:
+
     Printer();
     ~Printer();
 
     void SetupScreen();
+    void EndScreen();
     void RefreshScreen();
     void RefreshGameSpace();
     void RefreshPoints();

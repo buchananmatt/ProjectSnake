@@ -6,6 +6,9 @@
 //
 // GITHUB REPOSITORY https://github.com/buchananmatt/ProjectSnake.git
 //
+// THIS PROJECT IS DOCUMENTED WITH DOXYGEN. SEE DOCUMENTATION AT BELOW SITE.
+// https://htmlpreview.github.io/?https://github.com/buchananmatt/ProjectSnake/blob/master/doc/html/index.html
+//
 // COPYRIGHT [2023] [MATTHEW T. BUCHANAN] [BOCAN SOFTWARE]
 //
 // LICENSED UNDER THE APACHE LICENSE, VERSION 2.0 (THE "LICENSE");
@@ -20,13 +23,26 @@
 // SEE THE LICENSE FOR THE SPECIFIC LANGUAGE GOVERNING PERMISSIONS AND
 // LIMITATIONS UNDER THE LICENSE.
 
+/// @file This file contains the main function.
+/// The main function constructs a Game object and calls its public methods to
+/// run the game. Game takes care of all of the Printer method calls.
+///
+/// @namespace bocan is the namespace used for all bocan software projects.
+/// It is my personal 'global' namespace for all of my work.
+///
+/// @namespace snake is the namespace used for this project.
+
 #include "./game/game.hpp"
 
 int main(int argc, char** argv) {
 
     bocan::snake::Game game = bocan::snake::Game();
 
-    game.Start();
+    do {
+        game.Start();
+        game.GameLoop();
+        
+    } while(!game.EndGame());
 
     return 0;
 }

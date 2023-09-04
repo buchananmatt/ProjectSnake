@@ -6,6 +6,9 @@
 //
 // GITHUB REPOSITORY https://github.com/buchananmatt/ProjectSnake.git
 //
+// THIS PROJECT IS DOCUMENTED WITH DOXYGEN. SEE DOCUMENTATION AT BELOW SITE.
+// https://htmlpreview.github.io/?https://github.com/buchananmatt/ProjectSnake/blob/master/doc/html/index.html
+//
 // COPYRIGHT [2023] [MATTHEW T. BUCHANAN] [BOCAN SOFTWARE]
 //
 // LICENSED UNDER THE APACHE LICENSE, VERSION 2.0 (THE "LICENSE");
@@ -39,7 +42,7 @@ public:
 
     void Start();
     void GameLoop();
-    void EndGame();
+    bool EndGame();
 
 private:
 
@@ -47,17 +50,28 @@ private:
 
     Printer* printer;
 
+    /// @brief Data structure to represent the snake.
+    /// Snake is a vector of arrays. 
+    /// Each array represents a snake segment's position on the screen.
+    /// std::array<int,2> = {y_position, x_position}
+    ///
     std::vector<std::array<int, 2>> m_snake;
+
+    const std::vector<std::array<int, 2>>& GetSnake() { return m_snake; };
 
     std::array<int, 2> m_food;
 
+    const std::array<int, 2>& GetFood() { return m_food; };
+
     const int k_frame_rate = 10;
-    const int k_game_space_x = 100;
-    const int k_game_space_y = 45;
+    const int k_game_space_w = 115;
+    const int k_game_space_h = 42;
 
     int m_points;
     int m_high_score;
     int m_snake_dir;
+
+    bool m_quit_flag;
 
 private:
     void GenerateSnake();

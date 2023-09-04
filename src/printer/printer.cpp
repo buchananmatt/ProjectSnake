@@ -6,6 +6,9 @@
 //
 // GITHUB REPOSITORY https://github.com/buchananmatt/ProjectSnake.git
 //
+// THIS PROJECT IS DOCUMENTED WITH DOXYGEN. SEE DOCUMENTATION AT BELOW SITE.
+// https://htmlpreview.github.io/?https://github.com/buchananmatt/ProjectSnake/blob/master/doc/html/index.html
+//
 // COPYRIGHT [2023] [MATTHEW T. BUCHANAN] [BOCAN SOFTWARE]
 //
 // LICENSED UNDER THE APACHE LICENSE, VERSION 2.0 (THE "LICENSE");
@@ -25,21 +28,16 @@
 #include "../game/game.hpp"
 #include "../printer/printer.hpp"
 
+using bocan::snake::Game;
 using bocan::snake::Printer;
 
 Printer::Printer() {
 
 
-
-}
+} 
 
 Printer::~Printer() {
 
-    delwin(win_title);
-    delwin(win_high_score);
-    delwin(win_points);
-    delwin(win_game_space);
-    endwin();
 
 }
 
@@ -48,19 +46,36 @@ void Printer::SetupScreen() {
     initscr();
     cbreak();
     noecho();
-    keypad(stdscr, true);
+    keypad(win_game_space, true);
     nodelay(stdscr, true);
 
-    win_title = newwin(7, 50, 3, 35);
-    win_high_score = newwin(7, 20, 3, 10);
-    win_points = newwin(7, 20, 3, 90);
-    win_game_space = newwin(45, 100, 10, 10);
+    // total screen size 115 columns x 52 rows
+    // screen begins on column 10 and row 2
+    win_title = newwin(7, 50, 2, 43);
+    win_high_score = newwin(7, 20, 2, 10);
+    win_points = newwin(7, 20, 2, 105);
+    win_game_space = newwin(42, 115, 10, 10);
 
     wborder(win_title, 0, 0, 0, 0, 0, 0, 0, 0);
     wborder(win_high_score, 0, 0, 0, 0, 0, 0, 0, 0);
     wborder(win_points, 0, 0, 0, 0, 0, 0, 0, 0);
     wborder(win_game_space, 0, 0, 0, 0, 0, 0, 0, 0);
 
+    PrintTitle();
+    PrintHighScore();
+    PrintPoints();
+
+    wrefresh(win_game_space);
+
+}
+
+void Printer::EndScreen() {
+
+    delwin(win_title);
+    delwin(win_high_score);
+    delwin(win_points);
+    delwin(win_game_space);
+    endwin();
 
 }
 
@@ -85,7 +100,10 @@ void Printer::RefreshPoints() {
 
 void Printer::StartGame() {
 
-    PrintGameSpace();
+    wmove(win_game_space, 1, 1);
+    static_cast<void> ( waddstr(win_game_space, ">PRESS ANY KEY TO START... PRESS 'Q' ANYTIME TO QUIT...") );
+    wrefresh(win_game_space);
+    
 }
 
 void Printer::EndGame() {
@@ -99,6 +117,15 @@ int Printer::GetUserInput() {
     int ch = wgetch(win_title);
 
     switch(ch) {
+        case 'Q':
+        case 'q':
+            return QUIT;
+        case 'N':
+        case 'n':
+            return NO;
+        case 'Y':
+        case 'y':
+            return YES;
         case KEY_UP:
             return DIRECTION_UP;    
         case KEY_DOWN:
@@ -109,9 +136,6 @@ int Printer::GetUserInput() {
             return DIRECTION_RIGHT; 
         case KEY_ENTER:
             return ENTER;
-        case 'Q':
-        case 'q':
-            return QUIT;
         default:
             return ERROR;
     }
@@ -155,17 +179,16 @@ void Printer::PrintPoints() {
 
 void Printer::PrintGameSpace() {
 
-    wmove(win_game_space, 19, 9);
-    static_cast<void> ( waddch(win_game_space, '0') );
+    // print the snake
+    for(auto seg : bocan::snake::Game::m_snake) {
+        wmove(win_game_space, seg[0], seg[1]);
+        static_cast<void> ( waddch(win_game_space, '0') );
+    }
 
-    for(int i = 0; i < 7; i++) {
-        wmove(win_game_space, i+20, 34);
-        static_cast<void> ( waddch(win_game_space, '0') );
-    }
-    for(int i = 0; i < 15; i++) {
-        wmove(win_game_space, 26, 34+i);
-        static_cast<void> ( waddch(win_game_space, '0') );
-    }
+    // print the food
+    wmove(win_game_space, bocan::snake::Game::m_food[0], bocan::snake::Game::m_food[1]);
+    static_cast<void> ( waddch(win_game_space, '@') );
+
 
     wrefresh(win_game_space);
 
