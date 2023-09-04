@@ -1,0 +1,81 @@
+\doxysection{game.\+hpp}
+\hypertarget{game_8hpp_source}{}\label{game_8hpp_source}\index{src/game/game.hpp@{src/game/game.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//\ }}
+\DoxyCodeLine{00002\ \textcolor{comment}{//\ GAME.HPP\ [PROJECT\ SNAKE]}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//\ C++\ VERSION\ GNU++14}}
+\DoxyCodeLine{00004\ \textcolor{comment}{//\ macOS\ 11.7.9}}
+\DoxyCodeLine{00005\ \textcolor{comment}{//\ DUAL-\/CORE\ INTEL\ CORE\ i5\ @\ 2.8\ GHZ}}
+\DoxyCodeLine{00006\ \textcolor{comment}{//}}
+\DoxyCodeLine{00007\ \textcolor{comment}{//\ GITHUB\ REPOSITORY\ https://github.com/buchananmatt/ProjectSnake.git}}
+\DoxyCodeLine{00008\ \textcolor{comment}{//}}
+\DoxyCodeLine{00009\ \textcolor{comment}{//\ COPYRIGHT\ [2023]\ [MATTHEW\ T.\ BUCHANAN]\ [BOCAN\ SOFTWARE]}}
+\DoxyCodeLine{00010\ \textcolor{comment}{//}}
+\DoxyCodeLine{00011\ \textcolor{comment}{//\ LICENSED\ UNDER\ THE\ APACHE\ LICENSE,\ VERSION\ 2.0\ (THE\ "{}LICENSE"{});}}
+\DoxyCodeLine{00012\ \textcolor{comment}{//\ YOU\ MAY\ NOT\ USE\ THIS\ FILE\ EXCEPT\ IN\ COMPLIANCE\ WITH\ THE\ LICENSE.}}
+\DoxyCodeLine{00013\ \textcolor{comment}{//\ YOU\ MAY\ OBTAIN\ A\ COPY\ OF\ THE\ LICENSE\ AT\ }}
+\DoxyCodeLine{00014\ \textcolor{comment}{//}}
+\DoxyCodeLine{00015\ \textcolor{comment}{//\ http://www.apacher.org/licenses.LICENSE-\/2.0}}
+\DoxyCodeLine{00016\ \textcolor{comment}{//}}
+\DoxyCodeLine{00017\ \textcolor{comment}{//\ UNLESS\ REQUIRED\ BY\ APPLICABLE\ LAW\ OR\ AGREED\ TO\ IN\ WRITING,\ SOFTWARE}}
+\DoxyCodeLine{00018\ \textcolor{comment}{//\ DISTRIBUTED\ UNDER\ THE\ LICENSE\ IS\ DISTRIBUTED\ ON\ AN\ "{}AS\ IS"{}\ BASIS,}}
+\DoxyCodeLine{00019\ \textcolor{comment}{//\ WITHOUT\ WARRANTIES\ OR\ CONDITIONS\ OF\ ANY\ KIND,\ EITHER\ EXPRESS\ OR\ IMPLIED.}}
+\DoxyCodeLine{00020\ \textcolor{comment}{//\ SEE\ THE\ LICENSE\ FOR\ THE\ SPECIFIC\ LANGUAGE\ GOVERNING\ PERMISSIONS\ AND}}
+\DoxyCodeLine{00021\ \textcolor{comment}{//\ LIMITATIONS\ UNDER\ THE\ LICENSE.}}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#ifndef\ GAME\_HPP}}
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#define\ GAME\_HPP}}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00027\ \textcolor{preprocessor}{\#include\ <array>}}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \textcolor{keyword}{namespace\ }bocan\ \{}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \textcolor{keyword}{namespace\ }snake\ \{}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \textcolor{keyword}{class\ }Printer;}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classbocan_1_1snake_1_1_game}{Game}}\ \{}
+\DoxyCodeLine{00036\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00037\ \ \ \ \ \mbox{\hyperlink{classbocan_1_1snake_1_1_game_ad59df6562a58a614fda24622d3715b65}{Game}}();}
+\DoxyCodeLine{00038\ \ \ \ \ \mbox{\hyperlink{classbocan_1_1snake_1_1_game}{\string~Game}}();}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keywordtype}{void}\ Start();}
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keywordtype}{void}\ GameLoop();}
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keywordtype}{void}\ EndGame();}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classbocan_1_1snake_1_1_printer}{Printer}};}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \ \ \ \ \mbox{\hyperlink{classbocan_1_1snake_1_1_printer}{Printer}}*\ printer;}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \ \ \ \ std::vector<std::array<int,\ 2>>\ m\_snake;}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \ \ \ \ std::array<int,\ 2>\ m\_food;}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ k\_frame\_rate\ =\ 10;}
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ k\_game\_space\_x\ =\ 100;}
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ k\_game\_space\_y\ =\ 45;}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keywordtype}{int}\ m\_points;}
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keywordtype}{int}\ m\_high\_score;}
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keywordtype}{int}\ m\_snake\_dir;}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keywordtype}{void}\ GenerateSnake();}
+\DoxyCodeLine{00064\ \ \ \ \ \textcolor{keywordtype}{void}\ GenerateFood();}
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keywordtype}{void}\ MoveSnake();}
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keywordtype}{bool}\ FoodCollision();}
+\DoxyCodeLine{00067\ \ \ \ \ \textcolor{keywordtype}{void}\ IncreaseSnakeSize();}
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{keywordtype}{bool}\ CollisionDetect();}
+\DoxyCodeLine{00069\ \};}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00071\ \}\ \textcolor{comment}{//\ NAMESPACE\ SNAKE}}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00073\ \}\ \textcolor{comment}{//\ NAMESPACE\ BOCAN}}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00075\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ GAME\_HPP}}
+
+\end{DoxyCode}

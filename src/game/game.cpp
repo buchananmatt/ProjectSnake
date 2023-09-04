@@ -30,6 +30,10 @@
 using bocan::snake::Game;
 using bocan::snake::Printer;
 
+/// @brief Constructor for the Game class object.
+///
+/// @return Game object instance. Only one instance is initialized in the main function.
+///
 Game::Game() {
 
     printer = new Printer();
