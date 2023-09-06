@@ -80,8 +80,9 @@ void Game::GameLoop() {
 
     GenerateSnake();
     GenerateFood();
-    printer->RefreshGameSpace();
-/*
+    printer->RefreshGameSpace(m_snake, m_food);
+//    int i = printer->GetUserInput();
+
     do {
         // delay program to establish frame rate
         std::this_thread::sleep_for(std::chrono::milliseconds(k_frame_rate));
@@ -91,7 +92,7 @@ void Game::GameLoop() {
 
         // update snake positions
         MoveSnake();
-
+/*
         // check if snake collided with food
         if(FoodCollision()) {
             GenerateFood();
@@ -99,13 +100,14 @@ void Game::GameLoop() {
             m_points += 10;
             printer->RefreshPoints();
         }
-
+*/
         // refresh the game space window
-        printer->RefreshGameSpace();
-
+        printer->RefreshGameSpace(m_snake, m_food);
+/*
         // check if snake collided with wall or snake
     }   while(!CollisionDetect());
 */
+    } while(1);
 }
 
 
@@ -137,6 +139,27 @@ void Game::GenerateFood() {
 
 void Game::MoveSnake() {
 
+    std::array<int, 2> new_seg = m_snake.front();
+
+    switch(m_snake_dir) {
+        case DIRECTION_UP:
+            new_seg.at(0) -= 1;
+            break;
+        case DIRECTION_DOWN:
+            new_seg.at(0) += 1;
+            break;
+        case DIRECTION_LEFT:
+            new_seg.at(1) -= 1;
+            break;
+        case DIRECTION_RIGHT:
+            new_seg.at(1) += 1;
+            break;
+        default:
+            break;
+    }
+
+    m_snake.push_front(new_seg);
+//    m_snake.pop_back();
 
 }
 

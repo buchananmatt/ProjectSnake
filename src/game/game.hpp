@@ -26,7 +26,7 @@
 #ifndef GAME_HPP
 #define GAME_HPP
 
-#include <vector>
+#include <list>
 #include <array>
 
 namespace bocan {
@@ -51,17 +51,17 @@ private:
     Printer* printer;
 
     /// @brief Data structure to represent the snake.
-    /// Snake is a vector of arrays. 
+    /// Snake is a list of arrays. 
     /// Each array represents a snake segment's position on the screen.
     /// std::array<int,2> = {y_position, x_position}
     ///
-    std::vector<std::array<int, 2>> m_snake;
+    std::list<std::array<int, 2>> m_snake;
 
-    const std::vector<std::array<int, 2>>& GetSnake() { return m_snake; };
+    //const std::vector<std::array<int, 2>>& GetSnake() { return m_snake; };
 
     std::array<int, 2> m_food;
 
-    const std::array<int, 2>& GetFood() { return m_food; };
+    //const std::array<int, 2>& GetFood() { return m_food; };
 
     const int k_frame_rate = 10;
     const int k_game_space_w = 115;

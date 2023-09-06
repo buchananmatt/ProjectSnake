@@ -47,7 +47,7 @@ void Printer::SetupScreen() {
     cbreak();
     noecho();
     keypad(win_game_space, true);
-    nodelay(stdscr, true);
+    nodelay(win_game_space, true);
 
     // total screen size 115 columns x 52 rows
     // screen begins on column 10 and row 2
@@ -84,13 +84,12 @@ void Printer::RefreshScreen() {
     PrintTitle();
     PrintHighScore();
     PrintPoints();
-    PrintGameSpace();
 
 }
 
-void Printer::RefreshGameSpace() {
+void Printer::RefreshGameSpace(std::list<std::array<int, 2>> snake, std::array<int, 2> food) {
 
-    PrintGameSpace();
+    PrintGameSpace(snake, food);
 }
 
 void Printer::RefreshPoints() {
@@ -108,13 +107,12 @@ void Printer::StartGame() {
 
 void Printer::EndGame() {
 
-    PrintGameSpace();
+//    PrintGameSpace();
 }
 
 int Printer::GetUserInput() {
 
-//    int ch = wgetch(stdscr);
-    int ch = wgetch(win_title);
+    int ch = wgetch(win_game_space);
 
     switch(ch) {
         case 'Q':
@@ -177,17 +175,17 @@ void Printer::PrintPoints() {
 
 }
 
-void Printer::PrintGameSpace() {
+void Printer::PrintGameSpace(std::list<std::array<int, 2>> snake, std::array<int, 2> food) {
 
     // print the snake
-    for(auto seg : bocan::snake::Game::m_snake) {
+    for(auto seg : snake) {
         wmove(win_game_space, seg[0], seg[1]);
-        static_cast<void> ( waddch(win_game_space, '0') );
+        static_cast<void> ( waddch(win_game_space, '#') );
     }
 
     // print the food
-    wmove(win_game_space, bocan::snake::Game::m_food[0], bocan::snake::Game::m_food[1]);
-    static_cast<void> ( waddch(win_game_space, '@') );
+    wmove(win_game_space, food[0], food[1]);
+    static_cast<void> ( waddch(win_game_space, '*') );
 
 
     wrefresh(win_game_space);

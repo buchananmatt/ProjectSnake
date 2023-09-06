@@ -28,7 +28,7 @@
 /// run the game. Game takes care of all of the Printer method calls.
 ///
 /// @namespace bocan is the namespace used for all bocan software projects.
-/// It is my personal 'global' namespace for all of my work.
+/// It is my personal namespace for all of my work.
 ///
 /// @namespace snake is the namespace used for this project.
 
