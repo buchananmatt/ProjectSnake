@@ -50,6 +50,7 @@ void Printer::SetupScreen() {
     cbreak();
     noecho();
     keypad(win_game_space, true);
+    keypad(stdscr, true);
     nodelay(win_game_space, true);
     nodelay(stdscr, true);
 
@@ -118,7 +119,10 @@ int Printer::GetUserInput() {
 
     int ch;
 
-    if( (ch = wgetch(win_game_space)) == ERR) return ERROR;
+    if( (ch = wgetch(stdscr)) == ERR) {
+        db_printer->Print(ch);
+        return ERROR;
+    }
     else {
 
         db_printer->Print(ch);
@@ -133,13 +137,13 @@ int Printer::GetUserInput() {
             case 'Y':
             case 'y':
                 return YES;
-            case 'A':
+            case KEY_UP:
                 return DIRECTION_UP;    
-            case 'B':
+            case KEY_DOWN:
                 return DIRECTION_DOWN;
-            case 'D':
+            case KEY_LEFT:
                 return DIRECTION_LEFT;
-            case 'C':
+            case KEY_RIGHT:
                 return DIRECTION_RIGHT; 
             default:
                 return ERROR;
@@ -148,6 +152,9 @@ int Printer::GetUserInput() {
 }
 
 void Printer::PrintTitle() {
+
+    werase(win_title); 
+    wborder(win_title, 0, 0, 0, 0, 0, 0, 0, 0);
 
     wmove(win_title, 2, 19);
     static_cast<void> ( waddstr(win_title, "PROJECT SNAKE") );
@@ -161,6 +168,9 @@ void Printer::PrintTitle() {
 
 void Printer::PrintHighScore() {
 
+    werase(win_high_score); 
+    wborder(win_high_score, 0, 0, 0, 0, 0, 0, 0, 0);
+
     wmove(win_high_score, 2, 5);
     static_cast<void> ( waddstr(win_high_score, "HIGH SCORE") );
 
@@ -172,6 +182,9 @@ void Printer::PrintHighScore() {
 }
 
 void Printer::PrintPoints() {
+
+    werase(win_points); 
+    wborder(win_points, 0, 0, 0, 0, 0, 0, 0, 0);
 
     wmove(win_points, 2, 7);
     static_cast<void> ( waddstr(win_points, "POINTS") );
@@ -186,7 +199,7 @@ void Printer::PrintPoints() {
 void Printer::PrintGameSpace(std::list<std::array<int, 2>> snake, std::array<int, 2> food) {
 
     // clear the screen
-    werase(win_game_space);                                                                        //curses.h
+    werase(win_game_space); 
     wborder(win_game_space, 0, 0, 0, 0, 0, 0, 0, 0);
 
     // print the snake

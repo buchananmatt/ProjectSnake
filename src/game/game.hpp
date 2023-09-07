@@ -63,7 +63,7 @@ private:
 
     //const std::array<int, 2>& GetFood() { return m_food; };
 
-    const int k_frame_rate = 100;
+    const int k_frame_rate = 300;
     const int k_game_space_w = 115;
     const int k_game_space_h = 42;
 

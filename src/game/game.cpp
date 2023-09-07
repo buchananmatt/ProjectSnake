@@ -80,6 +80,7 @@ void Game::GameLoop() {
 
     GenerateSnake();
     GenerateFood();
+    printer->RefreshScreen();
     printer->RefreshGameSpace(m_snake, m_food);
 //    int i = printer->GetUserInput();
 
@@ -100,9 +101,10 @@ void Game::GameLoop() {
             MoveSnake();   
         }
 
-/*
+
         // check if snake collided with food
         if(FoodCollision()) {
+            
             GenerateFood();
             IncreaseSnakeSize();
             m_points += 10; 
@@ -110,6 +112,7 @@ void Game::GameLoop() {
         }
 */
         // refresh the game space window
+        printer->RefreshScreen();
         printer->RefreshGameSpace(m_snake, m_food);
 /*
         // check if snake collided with wall or snake
@@ -167,8 +170,6 @@ void Game::MoveSnake() {
             break;
     }
 
-
-
     m_snake.push_front(new_seg);
     m_snake.pop_back();
 
@@ -176,11 +177,13 @@ void Game::MoveSnake() {
 
 bool Game::FoodCollision() {
 
-    return 1;
+    if(m_snake.front() == m_food) 
+        return true;
+    else 
+        return false;
 }
 
 void Game::IncreaseSnakeSize() {
-
 
 }
 
