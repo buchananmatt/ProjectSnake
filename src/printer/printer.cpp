@@ -27,12 +27,15 @@
 
 #include "../game/game.hpp"
 #include "../printer/printer.hpp"
+#include "../debug/debug_printer.hpp"
 
 using bocan::snake::Game;
 using bocan::snake::Printer;
+using bocan::snake::DebugPrinter;
 
 Printer::Printer() {
 
+    db_printer = new bocan::snake::DebugPrinter();
 
 } 
 
@@ -48,6 +51,7 @@ void Printer::SetupScreen() {
     noecho();
     keypad(win_game_space, true);
     nodelay(win_game_space, true);
+    nodelay(stdscr, true);
 
     // total screen size 115 columns x 52 rows
     // screen begins on column 10 and row 2
@@ -112,30 +116,34 @@ void Printer::EndGame() {
 
 int Printer::GetUserInput() {
 
-    int ch = wgetch(win_game_space);
+    int ch;
 
-    switch(ch) {
-        case 'Q':
-        case 'q':
-            return QUIT;
-        case 'N':
-        case 'n':
-            return NO;
-        case 'Y':
-        case 'y':
-            return YES;
-        case KEY_UP:
-            return DIRECTION_UP;    
-        case KEY_DOWN:
-            return DIRECTION_DOWN;
-        case KEY_LEFT:
-            return DIRECTION_LEFT;
-        case KEY_RIGHT:
-            return DIRECTION_RIGHT; 
-        case KEY_ENTER:
-            return ENTER;
-        default:
-            return ERROR;
+    if( (ch = wgetch(win_game_space)) == ERR) return ERROR;
+    else {
+
+        db_printer->Print(ch);
+
+        switch(ch) {
+            case 'Q':
+            case 'q':
+                return QUIT;
+            case 'N':
+            case 'n':
+                return NO;
+            case 'Y':
+            case 'y':
+                return YES;
+            case 'A':
+                return DIRECTION_UP;    
+            case 'B':
+                return DIRECTION_DOWN;
+            case 'D':
+                return DIRECTION_LEFT;
+            case 'C':
+                return DIRECTION_RIGHT; 
+            default:
+                return ERROR;
+        }
     }
 }
 
@@ -176,6 +184,10 @@ void Printer::PrintPoints() {
 }
 
 void Printer::PrintGameSpace(std::list<std::array<int, 2>> snake, std::array<int, 2> food) {
+
+    // clear the screen
+    werase(win_game_space);                                                                        //curses.h
+    wborder(win_game_space, 0, 0, 0, 0, 0, 0, 0, 0);
 
     // print the snake
     for(auto seg : snake) {

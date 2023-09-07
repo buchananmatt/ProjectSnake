@@ -28,11 +28,11 @@
 
 #include <ncurses.h>
 
-class vector;
-
 namespace bocan {
 
 namespace snake {
+
+class DebugPrinter;
 
 enum user_input {
     QUIT = 0,
@@ -51,6 +51,8 @@ public:
 
     Printer();
     ~Printer();
+
+    bocan::snake::DebugPrinter* db_printer;
 
     void SetupScreen();
     void EndScreen();

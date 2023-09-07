@@ -1,5 +1,5 @@
 // 
-// GAME.HPP [PROJECT SNAKE]
+// DEBUG.HPP [PROJECT SNAKE]
 // C++ VERSION GNU++14
 // macOS 11.7.9
 // DUAL-CORE INTEL CORE i5 @ 2.8 GHZ
@@ -23,67 +23,44 @@
 // SEE THE LICENSE FOR THE SPECIFIC LANGUAGE GOVERNING PERMISSIONS AND
 // LIMITATIONS UNDER THE LICENSE.
 
-#ifndef GAME_HPP
-#define GAME_HPP
+#ifndef DEBUG_HPP
+#define DEBUG_HPP
 
-#include <list>
-#include <array>
+#include <deque>
+#include <string>
+
+#include <ncurses.h>
 
 namespace bocan {
 
 namespace snake {
 
-class Printer;
+class DebugPrinter {
 
-class Game {
 public:
-    Game();
-    ~Game();
+    DebugPrinter();
+    ~DebugPrinter();
 
-    void Start();
-    void GameLoop();
-    bool EndGame();
+    void Print(int);
 
 private:
 
-    friend class Printer;
+    WINDOW* win_debug;
 
-    Printer* printer;
+    std::deque<int> m_debug_queue;
 
-    /// @brief Data structure to represent the snake.
-    /// Snake is a list of arrays. 
-    /// Each array represents a snake segment's position on the screen.
-    /// std::array<int,2> = {y_position, x_position}
-    ///
-    std::list<std::array<int, 2>> m_snake;
+    int m_max_queue_size = 47;
 
-    //const std::vector<std::array<int, 2>>& GetSnake() { return m_snake; };
-
-    std::array<int, 2> m_food;
-
-    //const std::array<int, 2>& GetFood() { return m_food; };
-
-    const int k_frame_rate = 100;
-    const int k_game_space_w = 115;
-    const int k_game_space_h = 42;
-
-    int m_points;
-    int m_high_score;
-    int m_snake_dir;
-
-    bool m_quit_flag;
-
-private:
-    void GenerateSnake();
-    void GenerateFood();
-    void MoveSnake();
-    bool FoodCollision();
-    void IncreaseSnakeSize();
-    bool CollisionDetect();
+    struct window_size {
+        const int y_origin = 2;
+        const int x_origin = 127;
+        const int y_height = 50;
+        const int x_length = 45;
+    } m_debug;
 };
 
 } // NAMESPACE SNAKE
 
 } // NAMESPACE BOCAN
 
-#endif // GAME_HPP
+#endif // DEBUG_HPP

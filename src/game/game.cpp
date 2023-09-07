@@ -83,21 +83,29 @@ void Game::GameLoop() {
     printer->RefreshGameSpace(m_snake, m_food);
 //    int i = printer->GetUserInput();
 
+    int dir;
+
     do {
         // delay program to establish frame rate
         std::this_thread::sleep_for(std::chrono::milliseconds(k_frame_rate));
 
         // get user input to change snake direction of movement
-        m_snake_dir = printer->GetUserInput();
+        if( (dir = printer->GetUserInput()) == ERROR) {
+            MoveSnake();
+        }
 
         // update snake positions
-        MoveSnake();
+        else {
+            m_snake_dir = dir;
+            MoveSnake();   
+        }
+
 /*
         // check if snake collided with food
         if(FoodCollision()) {
             GenerateFood();
             IncreaseSnakeSize();
-            m_points += 10;
+            m_points += 10; 
             printer->RefreshPoints();
         }
 */
@@ -155,17 +163,20 @@ void Game::MoveSnake() {
             new_seg.at(1) += 1;
             break;
         default:
+            new_seg.at(1) += 1;
             break;
     }
 
+
+
     m_snake.push_front(new_seg);
-//    m_snake.pop_back();
+    m_snake.pop_back();
 
 }
 
 bool Game::FoodCollision() {
 
-
+    return 1;
 }
 
 void Game::IncreaseSnakeSize() {
@@ -175,5 +186,5 @@ void Game::IncreaseSnakeSize() {
 
 bool Game::CollisionDetect() {
 
-
+    return 1;
 }

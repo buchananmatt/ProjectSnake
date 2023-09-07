@@ -16,4 +16,7 @@ printer.o: ./src/printer/printer.cpp ./src/printer/printer.hpp
 demo:
 	clang++ -std=gnu++14 -lncurses ./test/demo.cpp -o ./test/demo.out
 
+debug:
+	clang++ -std=gnu++14 -lncurses ./src/main.cpp ./src/game/game.cpp ./src/printer/printer.cpp ./src/debug/debug_printer.cpp -o ./bin/snake_debug.out
+
 clean:
