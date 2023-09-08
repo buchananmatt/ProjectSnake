@@ -110,7 +110,7 @@ void Game::GameLoop() {
             m_points += 10; 
             printer->RefreshPoints();
         }
-*/
+
         // refresh the game space window
         printer->RefreshScreen();
         printer->RefreshGameSpace(m_snake, m_food);
@@ -185,6 +185,39 @@ bool Game::FoodCollision() {
 
 void Game::IncreaseSnakeSize() {
 
+    std::array<int, 2> curr_last_segment = m_snake.back();
+    m_snake.pop_back();
+
+    std::array<int, 2> new_last_segment;
+
+    // compare x values of last two segments
+    if(curr_last_segment.at(0) == m_snake.back().at(0)) {
+
+        // snake is moving left, add new segment right of current last segment
+        if(curr_last_segment.at(1) > m_snake.back().at(1))
+
+            new_last_segment = {curr_last_segment.at(0), curr_last_segment.at(1) + 1};
+        // snake is moving right, add new segment left of current last segment
+        else 
+
+            new_last_segment = {curr_last_segment.at(0), curr_last_segment.at(1) - 1};
+
+    // compare y values of last two segments
+    } else if (curr_last_segment.at(1) == m_snake.back().at(1)) {
+
+        // snake is moving up, add new segment down from current last segment
+        if(curr_last_segment.at(0) > m_snake.back().at(0))
+
+            new_last_segment = {curr_last_segment.at(0) + 1, curr_last_segment.at(1)};
+
+        // snake is moving down, add new segment up from current last segment
+        else
+
+            new_last_segment = {curr_last_segment.at(0) - 1, curr_last_segment.at(1)};
+    }
+
+    m_snake.push_back(curr_last_segment);
+    m_snake.push_back(new_last_segment);
 }
 
 bool Game::CollisionDetect() {
