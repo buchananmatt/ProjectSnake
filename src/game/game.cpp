@@ -80,9 +80,8 @@ void Game::GameLoop() {
 
     GenerateSnake();
     GenerateFood();
-    printer->RefreshScreen();
+    printer->RefreshScreen(m_points);
     printer->RefreshGameSpace(m_snake, m_food);
-//    int i = printer->GetUserInput();
 
     int dir;
 
@@ -91,10 +90,26 @@ void Game::GameLoop() {
         std::this_thread::sleep_for(std::chrono::milliseconds(k_frame_rate));
 
         // get user input to change snake direction of movement
-        if( (dir = printer->GetUserInput()) == ERROR) {
+
+        // check if user quit the game
+        if( (dir = printer->GetUserInput()) == QUIT) {
+            m_quit_flag = true;
+            break;
+
+        // if no user input, continue movement in current direction
+        } else if(dir == ERROR) {
+            MoveSnake();
+
+        // throw away input if move command is in opposite direction
+        } else if(dir == DIRECTION_UP && m_snake_dir == DIRECTION_DOWN) {
+            MoveSnake();
+        } else if(dir == DIRECTION_DOWN && m_snake_dir == DIRECTION_UP) {
+            MoveSnake();
+        } else if(dir == DIRECTION_LEFT && m_snake_dir == DIRECTION_RIGHT) {
+            MoveSnake();
+        } else if (dir == DIRECTION_RIGHT && m_snake_dir == DIRECTION_LEFT) {
             MoveSnake();
         }
-
         // update snake positions
         else {
             m_snake_dir = dir;
@@ -112,14 +127,13 @@ void Game::GameLoop() {
         }
 
         // refresh the game space window
-        printer->RefreshScreen();
+        printer->RefreshScreen(m_points);
         printer->RefreshGameSpace(m_snake, m_food);
-/*
-        // check if snake collided with wall or snake
+
+        // check if snake collided with wall or snake or if user quit the game
     }   while(!CollisionDetect());
-*/
-    } while(1);
 }
+
 
 
 bool Game::EndGame() {
@@ -138,13 +152,15 @@ void Game::GenerateSnake() {
     m_snake.push_back( {{k_game_space_h / 2, k_game_space_w / 2}} );
 
     // generate random starting direction of the snake
-    m_snake_dir = rand() % 4;
+    m_snake_dir = ( rand() % 4 ) + 3;
 }
 
 void Game::GenerateFood() {
 
     // generate random location of the food
-    m_food = {rand() % k_game_space_h, rand() % k_game_space_w};
+    m_food = {rand() % (k_game_space_h-1), rand() % (k_game_space_w-1)};
+    if(m_food.at(0) == 0) m_food.at(0)++;
+    if(m_food.at(1) == 0) m_food.at(1)++;
 
 }
 
@@ -166,7 +182,6 @@ void Game::MoveSnake() {
             new_seg.at(1) += 1;
             break;
         default:
-            new_seg.at(1) += 1;
             break;
     }
 
@@ -222,5 +237,30 @@ void Game::IncreaseSnakeSize() {
 
 bool Game::CollisionDetect() {
 
-    return 1;
+    // check for collision between snake and boundary
+
+    // check vertical boundary
+    if(m_snake.front().at(0) == 0 || m_snake.front().at(0) == k_game_space_h-1)
+        return true;
+    // check horizontal boundary
+    if(m_snake.front().at(1) == 0 || m_snake.front().at(1) == k_game_space_w-1)
+        return true;
+
+    // check for collision between snake front and other snake segments
+
+    // temporarily remove first segment
+    std::array<int, 2> first_segment = m_snake.front();
+    m_snake.pop_front();
+
+    // compare position of first segment with other segments
+    for(auto itr = m_snake.rbegin(); itr != m_snake.rend(); itr++) {
+        if(first_segment == *itr) {
+            m_snake.push_front(first_segment);
+            return true;
+        }
+    }
+    
+    // collision not detected
+    m_snake.push_front(first_segment);
+    return false;
 }

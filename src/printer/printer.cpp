@@ -23,6 +23,7 @@
 // SEE THE LICENSE FOR THE SPECIFIC LANGUAGE GOVERNING PERMISSIONS AND
 // LIMITATIONS UNDER THE LICENSE.
 
+#include <string>
 #include <ncurses.h>
 
 #include "../game/game.hpp"
@@ -68,7 +69,7 @@ void Printer::SetupScreen() {
 
     PrintTitle();
     PrintHighScore();
-    PrintPoints();
+    PrintPoints(0);
 
     wrefresh(win_game_space);
 
@@ -84,11 +85,11 @@ void Printer::EndScreen() {
 
 }
 
-void Printer::RefreshScreen() {
+void Printer::RefreshScreen(int score) {
 
     PrintTitle();
     PrintHighScore();
-    PrintPoints();
+    PrintPoints(score);
 
 }
 
@@ -99,7 +100,6 @@ void Printer::RefreshGameSpace(std::list<std::array<int, 2>> snake, std::array<i
 
 void Printer::RefreshPoints() {
 
-    PrintPoints();
 }
 
 void Printer::StartGame() {
@@ -181,7 +181,9 @@ void Printer::PrintHighScore() {
 
 }
 
-void Printer::PrintPoints() {
+void Printer::PrintPoints(int score) {
+
+    std::string score_str = std::to_string(score);
 
     werase(win_points); 
     wborder(win_points, 0, 0, 0, 0, 0, 0, 0, 0);
@@ -190,7 +192,7 @@ void Printer::PrintPoints() {
     static_cast<void> ( waddstr(win_points, "POINTS") );
 
     wmove(win_points, 4, 9);
-    static_cast<void> ( waddstr(win_points, "20") );
+    static_cast<void> ( waddstr(win_points, score_str.c_str()) );
 
     wrefresh(win_points);
 
@@ -212,7 +214,7 @@ void Printer::PrintGameSpace(std::list<std::array<int, 2>> snake, std::array<int
     wmove(win_game_space, food[0], food[1]);
     static_cast<void> ( waddch(win_game_space, '*') );
 
-
+    wmove(win_game_space, 1, 1);
     wrefresh(win_game_space);
 
 }

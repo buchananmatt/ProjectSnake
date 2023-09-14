@@ -56,7 +56,7 @@ public:
 
     void SetupScreen();
     void EndScreen();
-    void RefreshScreen();
+    void RefreshScreen(int);
     void RefreshGameSpace(std::list<std::array<int, 2>>, std::array<int, 2>);
     void RefreshPoints();
 
@@ -76,7 +76,7 @@ private:
 
     void PrintTitle();
     void PrintHighScore();
-    void PrintPoints();
+    void PrintPoints(int);
     void PrintGameSpace(std::list<std::array<int, 2>>, std::array<int, 2>);
 
 };
