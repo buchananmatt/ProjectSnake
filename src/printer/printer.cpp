@@ -50,17 +50,15 @@ void Printer::SetupScreen() {
     initscr();
     cbreak();
     noecho();
-    keypad(win_game_space, true);
     keypad(stdscr, true);
-    nodelay(win_game_space, true);
     nodelay(stdscr, true);
 
     // total screen size 115 columns x 52 rows
     // screen begins on column 10 and row 2
-    win_title = newwin(7, 50, 2, 43);
-    win_high_score = newwin(7, 20, 2, 10);
-    win_points = newwin(7, 20, 2, 105);
-    win_game_space = newwin(42, 115, 10, 10);
+    win_title = newwin(7, 50, 1, 43);
+    win_high_score = newwin(7, 20, 1, 10);
+    win_points = newwin(7, 20, 1, 105);
+    win_game_space = newwin(37, 115, 8, 10);
 
     wborder(win_title, 0, 0, 0, 0, 0, 0, 0, 0);
     wborder(win_high_score, 0, 0, 0, 0, 0, 0, 0, 0);
@@ -102,17 +100,61 @@ void Printer::RefreshPoints() {
 
 }
 
-void Printer::StartGame() {
+bool Printer::StartGame() {
 
+    // clear the screen
+    werase(win_game_space);
+    wborder(win_game_space, 0, 0, 0, 0, 0, 0, 0, 0);
+
+    nodelay(stdscr, false);
     wmove(win_game_space, 1, 1);
+    static_cast<void> ( waddstr(win_game_space, ">WELCOME TO PROJECT SNAKE! BOCAN SOFTWARE'S IMPLEMENTATION OF THE CLASSIC GAME, SNAKE.") );
+    wmove(win_game_space, 2, 1);
+    static_cast<void> ( waddstr(win_game_space, ">THE CURRENT HIGH SCORE IS ... MADE ON ...") );
+    wmove(win_game_space, 3, 1);
     static_cast<void> ( waddstr(win_game_space, ">PRESS ANY KEY TO START... PRESS 'Q' ANYTIME TO QUIT...") );
     wrefresh(win_game_space);
-    
+
+    int ch = wgetch(win_game_space);
+    nodelay(stdscr, true);
+    switch(ch) {
+        case 'Q':
+        case 'q':
+            return false;
+        default:
+            return true;
+    }
 }
 
-void Printer::EndGame() {
+bool Printer::EndGame(int score) {
+    
+    // clear the screen
+    werase(win_game_space);
+    wborder(win_game_space, 0, 0, 0, 0, 0, 0, 0, 0);
 
-//    PrintGameSpace();
+    nodelay(stdscr, false);
+    wmove(win_game_space, 1, 1);
+    static_cast<void> ( waddstr(win_game_space, ">GAME OVER.") );
+    wmove(win_game_space, 2, 1);
+    static_cast<void> ( waddstr(win_game_space, ">YOUR SCORE IS ...") );
+    wmove(win_game_space, 3, 1);
+    if(score > m_high_score) {
+        static_cast<void> ( waddstr(win_game_space, ">YOU HAVE THE NEW HIGH SCORE!") );   
+    } else {
+        static_cast<void> ( waddstr(win_game_space, ">THE CURRENT HIGH SCORE IS ... MADE ON ...") );
+    }
+    wmove(win_game_space, 4, 1);
+    static_cast<void> ( waddstr(win_game_space, ">PRESS ANY KEY TO PLAY AGAIN OR PRESS 'Q' TO QUIT.") );
+
+    int ch = wgetch(win_game_space);
+    nodelay(stdscr, true);
+    switch(ch) {
+        case 'Q':
+        case 'q':
+            return true;
+        default:
+            return false;
+    }
 }
 
 int Printer::GetUserInput() {
@@ -168,6 +210,8 @@ void Printer::PrintTitle() {
 
 void Printer::PrintHighScore() {
 
+    std::string high_score_str = std::to_string(m_high_score);
+
     werase(win_high_score); 
     wborder(win_high_score, 0, 0, 0, 0, 0, 0, 0, 0);
 
@@ -175,7 +219,7 @@ void Printer::PrintHighScore() {
     static_cast<void> ( waddstr(win_high_score, "HIGH SCORE") );
 
     wmove(win_high_score, 4, 9);
-    static_cast<void> ( waddstr(win_high_score, "90") );
+    static_cast<void> ( waddstr(win_high_score, high_score_str.c_str()) );
 
     wrefresh(win_high_score);
 
@@ -189,7 +233,7 @@ void Printer::PrintPoints(int score) {
     wborder(win_points, 0, 0, 0, 0, 0, 0, 0, 0);
 
     wmove(win_points, 2, 7);
-    static_cast<void> ( waddstr(win_points, "POINTS") );
+    static_cast<void> ( waddstr(win_points, "SCORE") );
 
     wmove(win_points, 4, 9);
     static_cast<void> ( waddstr(win_points, score_str.c_str()) );

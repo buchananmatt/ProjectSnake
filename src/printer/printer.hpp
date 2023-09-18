@@ -60,8 +60,8 @@ public:
     void RefreshGameSpace(std::list<std::array<int, 2>>, std::array<int, 2>);
     void RefreshPoints();
 
-    void StartGame();
-    void EndGame();
+    bool StartGame();
+    bool EndGame(int);
 
     int GetUserInput();
 
@@ -71,6 +71,8 @@ private:
     WINDOW* win_high_score;
     WINDOW* win_points;
     WINDOW* win_game_space;
+
+    int m_high_score = 80;
 
 private:
 

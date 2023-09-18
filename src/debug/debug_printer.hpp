@@ -52,9 +52,9 @@ private:
     int m_max_queue_size = 47;
 
     struct window_size {
-        const int y_origin = 2;
+        const int y_origin = 1;
         const int x_origin = 127;
-        const int y_height = 50;
+        const int y_height = 44;
         const int x_length = 45;
     } m_debug;
 };

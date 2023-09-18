@@ -23,20 +23,20 @@
 // SEE THE LICENSE FOR THE SPECIFIC LANGUAGE GOVERNING PERMISSIONS AND
 // LIMITATIONS UNDER THE LICENSE.
 
-/// @file This file contains the main function.
+/// @file main.cpp This file contains the main function and entry point for the application.
 /// The main function constructs a Game object and calls its public methods to
 /// run the game. Game takes care of all of the Printer method calls.
 ///
 /// @namespace bocan is the namespace used for all bocan software projects.
-/// It is my personal namespace for all of my work.
+/// It is my personal namespace for all of my C++ projects.
 ///
-/// @namespace snake is the namespace used for this project.
+/// @namespace snake is the namespace used for this application.
 
 #include "./game/game.hpp"
 
 int main(int argc, char** argv) {
 
-    bocan::snake::Game game = bocan::snake::Game();
+    bocan::snake::Game game;
 
     do {
         game.Start();

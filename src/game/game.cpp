@@ -66,10 +66,9 @@ void Game::Start() {
 
     m_points = 0;
 
-    printer->StartGame();
+    bool input = printer->StartGame();
 
-    int input = printer->GetUserInput();
-    if(input == QUIT)
+    if(!input)
         m_quit_flag = true;
 
 }
@@ -140,10 +139,7 @@ bool Game::EndGame() {
 
     if(m_quit_flag) return true;
 
-    printer->EndGame();
-
-    return true;
-
+    return printer->EndGame(m_points);
 }
 
 void Game::GenerateSnake() {
@@ -161,7 +157,6 @@ void Game::GenerateFood() {
     m_food = {rand() % (k_game_space_h-1), rand() % (k_game_space_w-1)};
     if(m_food.at(0) == 0) m_food.at(0)++;
     if(m_food.at(1) == 0) m_food.at(1)++;
-
 }
 
 void Game::MoveSnake() {
