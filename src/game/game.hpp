@@ -36,6 +36,7 @@ namespace snake {
 class Printer;
 
 class Game {
+
 public:
     Game();
     ~Game();
@@ -61,7 +62,7 @@ private:
 
     const int k_frame_rate = 150;
     const int k_game_space_w = 115;
-    const int k_game_space_h = 42;
+    const int k_game_space_h = 35;
 
     int m_points;
     int m_high_score;

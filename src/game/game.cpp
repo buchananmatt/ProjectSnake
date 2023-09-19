@@ -36,9 +36,11 @@
 using bocan::snake::Game;
 using bocan::snake::Printer;
 
-/// @brief Constructor for the Game class object.
-/// 
-/// @return Game object instance. Only one instance is initialized in the main function.
+///
+/// @brief:  Constructor for the Game class object.
+/// @param: 
+/// @return: Game object instance. Only one instance is initialized in the main function.
+/// @todo:
 ///
 Game::Game() {
 
@@ -51,9 +53,11 @@ Game::Game() {
 //    printer->RefreshScreen();
 }
 
-/// @brief Destructor for the Game class object.
 ///
-///
+/// @brief:  Destructor for the Game class object.
+/// @param:
+/// @return: 
+/// @todo: 
 ///
 Game::~Game() {
 
@@ -62,6 +66,12 @@ Game::~Game() {
 
 }
 
+///
+/// @brief:  
+/// @param:
+/// @return:
+/// @todo:
+///
 void Game::Start() {
 
     m_points = 0;
@@ -73,6 +83,12 @@ void Game::Start() {
 
 }
 
+///
+/// @brief:
+/// @param:
+/// @return:
+/// @todo:
+///
 void Game::GameLoop() {
 
     if(m_quit_flag) return;
@@ -122,7 +138,6 @@ void Game::GameLoop() {
             GenerateFood();
             IncreaseSnakeSize();
             m_points += 10; 
-            printer->RefreshPoints();
         }
 
         // refresh the game space window
@@ -133,8 +148,12 @@ void Game::GameLoop() {
     }   while(!CollisionDetect());
 }
 
-
-
+///
+/// @brief:
+/// @param:
+/// @return:
+/// @todo:
+///
 bool Game::EndGame() {
 
     if(m_quit_flag) return true;
@@ -142,7 +161,16 @@ bool Game::EndGame() {
     return printer->EndGame(m_points);
 }
 
+///
+/// @brief:
+/// @param:
+/// @return:
+/// @todo:
+///
 void Game::GenerateSnake() {
+    
+    // clear the snake from the previous game
+    m_snake.clear();
 
     // generate snake segment in the middle of the game space
     m_snake.push_back( {{k_game_space_h / 2, k_game_space_w / 2}} );
@@ -151,14 +179,28 @@ void Game::GenerateSnake() {
     m_snake_dir = ( rand() % 4 ) + 3;
 }
 
+///
+/// @brief:
+/// @param:
+/// @return:
+/// @todo:
+///
 void Game::GenerateFood() {
 
     // generate random location of the food
     m_food = {rand() % (k_game_space_h-1), rand() % (k_game_space_w-1)};
+    
+    // generate food within game boundary
     if(m_food.at(0) == 0) m_food.at(0)++;
     if(m_food.at(1) == 0) m_food.at(1)++;
 }
 
+///
+/// @brief:
+/// @param:
+/// @return:
+/// @todo:
+///
 void Game::MoveSnake() {
 
     std::array<int, 2> new_seg = m_snake.front();
@@ -185,6 +227,12 @@ void Game::MoveSnake() {
 
 }
 
+///
+/// @brief:
+/// @param:
+/// @return:
+/// @todo:
+///
 bool Game::FoodCollision() {
 
     if(m_snake.front() == m_food) 
@@ -193,6 +241,12 @@ bool Game::FoodCollision() {
         return false;
 }
 
+///
+/// @brief:
+/// @param:
+/// @return:
+/// @todo:
+///
 void Game::IncreaseSnakeSize() {
 
     std::array<int, 2> curr_last_segment = m_snake.back();
@@ -230,6 +284,12 @@ void Game::IncreaseSnakeSize() {
     m_snake.push_back(new_last_segment);
 }
 
+///
+/// @brief:
+/// @param:
+/// @return:
+/// @todo:
+///
 bool Game::CollisionDetect() {
 
     // check for collision between snake and boundary

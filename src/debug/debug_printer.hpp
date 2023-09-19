@@ -28,6 +28,8 @@
 
 #include <deque>
 #include <string>
+#include <array>
+#include <list>
 
 #include <ncurses.h>
 
@@ -49,12 +51,12 @@ private:
 
     std::deque<int> m_debug_queue;
 
-    int m_max_queue_size = 47;
+    int m_max_queue_size = 35;
 
     struct window_size {
         const int y_origin = 1;
-        const int x_origin = 127;
-        const int y_height = 44;
+        const int x_origin = 120;
+        const int y_height = 40;
         const int x_length = 45;
     } m_debug;
 };

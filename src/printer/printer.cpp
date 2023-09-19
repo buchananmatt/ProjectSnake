@@ -34,17 +34,32 @@ using bocan::snake::Game;
 using bocan::snake::Printer;
 using bocan::snake::DebugPrinter;
 
+///
+/// @brief  | 
+/// @param  |
+/// @return |
+/// @todo   |
+///
 Printer::Printer() {
 
     db_printer = new bocan::snake::DebugPrinter();
 
 } 
 
-Printer::~Printer() {
+///
+/// @brief:
+/// @param:
+/// @return:
+/// @todo:
+///
+Printer::~Printer() {}
 
-
-}
-
+///
+/// @brief:
+/// @param:
+/// @return:
+/// @todo:
+///
 void Printer::SetupScreen() {
 
     initscr();
@@ -53,53 +68,74 @@ void Printer::SetupScreen() {
     keypad(stdscr, true);
     nodelay(stdscr, true);
 
-    // total screen size 115 columns x 52 rows
+    // total screen size ... columns x ... rows
     // screen begins on column 10 and row 2
-    win_title = newwin(7, 50, 1, 43);
-    win_high_score = newwin(7, 20, 1, 10);
-    win_points = newwin(7, 20, 1, 105);
-    win_game_space = newwin(37, 115, 8, 10);
+    win_title = newwin(5, 50, 1, 35);
+    win_high_score = newwin(5, 25, 1, 2);
+    win_score = newwin(5, 25, 1, 92);
+    win_game_space = newwin(35, 115, 6, 2);
 
     wborder(win_title, 0, 0, 0, 0, 0, 0, 0, 0);
     wborder(win_high_score, 0, 0, 0, 0, 0, 0, 0, 0);
-    wborder(win_points, 0, 0, 0, 0, 0, 0, 0, 0);
+    wborder(win_score, 0, 0, 0, 0, 0, 0, 0, 0);
     wborder(win_game_space, 0, 0, 0, 0, 0, 0, 0, 0);
 
     PrintTitle();
     PrintHighScore();
-    PrintPoints(0);
+    PrintScore(0);
 
     wrefresh(win_game_space);
 
 }
 
+///
+/// @brief:
+/// @param:
+/// @return:
+/// @todo: 
+///
 void Printer::EndScreen() {
 
     delwin(win_title);
     delwin(win_high_score);
-    delwin(win_points);
+    delwin(win_score);
     delwin(win_game_space);
     endwin();
 
 }
 
+///
+/// @brief:
+/// @param[in]:
+/// @return:
+/// @todo: 
+///
 void Printer::RefreshScreen(int score) {
 
     PrintTitle();
     PrintHighScore();
-    PrintPoints(score);
+    PrintScore(score);
 
 }
 
+///
+/// @brief:
+/// @param[in]:
+/// @param[in];
+/// @return:
+/// @todo:
+///
 void Printer::RefreshGameSpace(std::list<std::array<int, 2>> snake, std::array<int, 2> food) {
 
     PrintGameSpace(snake, food);
 }
 
-void Printer::RefreshPoints() {
-
-}
-
+///
+/// @brief:
+/// @param:
+/// @return:
+/// @todo:
+///
 bool Printer::StartGame() {
 
     // clear the screen
@@ -126,6 +162,12 @@ bool Printer::StartGame() {
     }
 }
 
+///
+/// @brief:
+/// @param[in]:
+/// @return:
+/// @todo:
+///
 bool Printer::EndGame(int score) {
     
     // clear the screen
@@ -157,17 +199,20 @@ bool Printer::EndGame(int score) {
     }
 }
 
+///
+/// @brief:
+/// @param:
+/// @return:
+/// @todo:
+///
 int Printer::GetUserInput() {
 
     int ch;
 
     if( (ch = wgetch(stdscr)) == ERR) {
-        db_printer->Print(ch);
         return ERROR;
     }
     else {
-
-        db_printer->Print(ch);
 
         switch(ch) {
             case 'Q':
@@ -193,21 +238,33 @@ int Printer::GetUserInput() {
     }
 }
 
+///
+/// @brief:
+/// @param:
+/// @return:
+/// @todo:
+///
 void Printer::PrintTitle() {
 
     werase(win_title); 
     wborder(win_title, 0, 0, 0, 0, 0, 0, 0, 0);
 
-    wmove(win_title, 2, 19);
+    wmove(win_title, 1, 19);
     static_cast<void> ( waddstr(win_title, "PROJECT SNAKE") );
 
-    wmove(win_title, 4, 4);
+    wmove(win_title, 3, 4);
     static_cast<void> ( waddstr(win_title, "[2023] [MATTHEW BUCHANAN] [BOCAN SOFTWARE]") );
 
     wrefresh(win_title);
 
 }
 
+///
+/// @brief:
+/// @param:
+/// @return:
+/// @todo:
+///
 void Printer::PrintHighScore() {
 
     std::string high_score_str = std::to_string(m_high_score);
@@ -216,37 +273,53 @@ void Printer::PrintHighScore() {
     wborder(win_high_score, 0, 0, 0, 0, 0, 0, 0, 0);
 
     wmove(win_high_score, 2, 5);
-    static_cast<void> ( waddstr(win_high_score, "HIGH SCORE") );
+    static_cast<void> ( waddstr(win_high_score, "HIGH SCORE: ") );
 
-    wmove(win_high_score, 4, 9);
+    wmove(win_high_score, 2, 18);
     static_cast<void> ( waddstr(win_high_score, high_score_str.c_str()) );
 
     wrefresh(win_high_score);
 
 }
 
-void Printer::PrintPoints(int score) {
+///
+/// @brief:
+/// @param[in]:
+/// @return:
+/// @todo:
+///
+void Printer::PrintScore(int score) {
 
     std::string score_str = std::to_string(score);
 
-    werase(win_points); 
-    wborder(win_points, 0, 0, 0, 0, 0, 0, 0, 0);
+    werase(win_score); 
+    wborder(win_score, 0, 0, 0, 0, 0, 0, 0, 0);
 
-    wmove(win_points, 2, 7);
-    static_cast<void> ( waddstr(win_points, "SCORE") );
+    wmove(win_score, 2, 7);
+    static_cast<void> ( waddstr(win_score, "SCORE: ") );
 
-    wmove(win_points, 4, 9);
-    static_cast<void> ( waddstr(win_points, score_str.c_str()) );
+    wmove(win_score, 2, 16);
+    static_cast<void> ( waddstr(win_score, score_str.c_str()) );
 
-    wrefresh(win_points);
+    wrefresh(win_score);
 
 }
 
+///
+/// @brief:    
+/// @param[in]:
+/// @param[in]:
+/// @return:   
+/// @todo:      pass arguments by reference or provide access to game members directly
+/// 
 void Printer::PrintGameSpace(std::list<std::array<int, 2>> snake, std::array<int, 2> food) {
 
     // clear the screen
     werase(win_game_space); 
     wborder(win_game_space, 0, 0, 0, 0, 0, 0, 0, 0);
+
+    // DEBUG print the size of the snake to the console
+    db_printer->Print(snake.size());
 
     // print the snake
     for(auto seg : snake) {

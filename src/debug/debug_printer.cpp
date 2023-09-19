@@ -75,7 +75,7 @@ void DebugPrinter::Print(int message) {
 
     for(auto s : m_debug_queue) {
         wmove(win_debug, i, 1);                                                            
-        static_cast<void> ( waddch(win_debug, s) );                                 
+        static_cast<void> ( waddch(win_debug, static_cast<char>(message)) );
         i++;
     }
     wrefresh(win_debug);
