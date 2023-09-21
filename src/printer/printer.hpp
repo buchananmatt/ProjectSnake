@@ -34,10 +34,16 @@ namespace snake {
 
 class DebugPrinter;
 
+///
+/// @brief
+/// @brief
+/// @brief
+///
 enum user_input {
     QUIT = 0,
     NO,
     YES,
+    PAUSE,
     DIRECTION_UP,
     DIRECTION_DOWN,
     DIRECTION_LEFT,
@@ -46,6 +52,11 @@ enum user_input {
     ERROR
 };
 
+///
+/// @brief
+/// @brief
+/// @brief
+///
 class Printer {
 public:
 
@@ -62,7 +73,11 @@ public:
     bool StartGame();
     bool EndGame(int);
 
-    int GetUserInput();
+    void Pause();        
+
+    void Exit();
+
+    int GetDirection();
 
 private:
 

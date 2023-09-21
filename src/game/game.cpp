@@ -23,7 +23,6 @@
 // SEE THE LICENSE FOR THE SPECIFIC LANGUAGE GOVERNING PERMISSIONS AND
 // LIMITATIONS UNDER THE LICENSE.
 
-#include <fstream>
 #include <thread>
 #include <chrono>
 
@@ -50,7 +49,6 @@ Game::Game() {
 
     printer = new Printer();
     printer->SetupScreen();
-//    printer->RefreshScreen();
 }
 
 ///
@@ -74,7 +72,7 @@ Game::~Game() {
 ///
 void Game::Start() {
 
-    m_points = 0;
+    m_score = 0;
 
     bool input = printer->StartGame();
 
@@ -95,10 +93,10 @@ void Game::GameLoop() {
 
     GenerateSnake();
     GenerateFood();
-    printer->RefreshScreen(m_points);
+    printer->RefreshScreen(m_score);
     printer->RefreshGameSpace(m_snake, m_food);
 
-    int dir;
+    int direction;
 
     do {
         // delay program to establish frame rate
@@ -107,27 +105,32 @@ void Game::GameLoop() {
         // get user input to change snake direction of movement
 
         // check if user quit the game
-        if( (dir = printer->GetUserInput()) == QUIT) {
+        if( (direction = printer->GetDirection()) == QUIT) {
             m_quit_flag = true;
             break;
+        
+        // check if user paused the game
+        if(direction == PAUSE) {
+            printer->Pause();
+        }
 
         // if no user input, continue movement in current direction
-        } else if(dir == ERROR) {
+        } else if(direction == ERROR) {
             MoveSnake();
 
         // throw away input if move command is in opposite direction
-        } else if(dir == DIRECTION_UP && m_snake_dir == DIRECTION_DOWN) {
+        } else if(direction == DIRECTION_UP && m_snake_direction == DIRECTION_DOWN) {
             MoveSnake();
-        } else if(dir == DIRECTION_DOWN && m_snake_dir == DIRECTION_UP) {
+        } else if(direction == DIRECTION_DOWN && m_snake_direction == DIRECTION_UP) {
             MoveSnake();
-        } else if(dir == DIRECTION_LEFT && m_snake_dir == DIRECTION_RIGHT) {
+        } else if(direction == DIRECTION_LEFT && m_snake_direction == DIRECTION_RIGHT) {
             MoveSnake();
-        } else if (dir == DIRECTION_RIGHT && m_snake_dir == DIRECTION_LEFT) {
+        } else if (direction == DIRECTION_RIGHT && m_snake_direction == DIRECTION_LEFT) {
             MoveSnake();
         }
         // update snake positions
         else {
-            m_snake_dir = dir;
+            m_snake_direction = direction;
             MoveSnake();   
         }
 
@@ -137,11 +140,11 @@ void Game::GameLoop() {
             
             GenerateFood();
             IncreaseSnakeSize();
-            m_points += 10; 
+            m_score += 10; 
         }
 
         // refresh the game space window
-        printer->RefreshScreen(m_points);
+        printer->RefreshScreen(m_score);
         printer->RefreshGameSpace(m_snake, m_food);
 
         // check if snake collided with wall or snake or if user quit the game
@@ -157,8 +160,13 @@ void Game::GameLoop() {
 bool Game::EndGame() {
 
     if(m_quit_flag) return true;
+    
+    int input = printer->EndGame(m_score);
+    
+    if(input) 
+        printer->Exit();
 
-    return printer->EndGame(m_points);
+    return input;
 }
 
 ///
@@ -176,7 +184,7 @@ void Game::GenerateSnake() {
     m_snake.push_back( {{k_game_space_h / 2, k_game_space_w / 2}} );
 
     // generate random starting direction of the snake
-    m_snake_dir = ( rand() % 4 ) + 3;
+    m_snake_direction = ( rand() % 4 ) + 3;
 }
 
 ///
@@ -203,26 +211,29 @@ void Game::GenerateFood() {
 ///
 void Game::MoveSnake() {
 
-    std::array<int, 2> new_seg = m_snake.front();
+    // generate a new snake segment at the front of the snake
+    std::array<int, 2> new_segment = m_snake.front();
 
-    switch(m_snake_dir) {
+    // move the new snake segment toward the current snake direction
+    switch(m_snake_direction) {
         case DIRECTION_UP:
-            new_seg.at(0) -= 1;
+            new_segment.at(0) -= 1;
             break;
         case DIRECTION_DOWN:
-            new_seg.at(0) += 1;
+            new_segment.at(0) += 1;
             break;
         case DIRECTION_LEFT:
-            new_seg.at(1) -= 1;
+            new_segment.at(1) -= 1;
             break;
         case DIRECTION_RIGHT:
-            new_seg.at(1) += 1;
+            new_segment.at(1) += 1;
             break;
         default:
             break;
     }
 
-    m_snake.push_front(new_seg);
+    // add the new snake segment to the snake and delete the last snake segment
+    m_snake.push_front(new_segment);
     m_snake.pop_back();
 
 }
@@ -249,38 +260,65 @@ bool Game::FoodCollision() {
 ///
 void Game::IncreaseSnakeSize() {
 
-    std::array<int, 2> curr_last_segment = m_snake.back();
-    m_snake.pop_back();
-
     std::array<int, 2> new_last_segment;
 
+    // check if snake has only one segment to avoid comparing last two segments
+    if(m_snake.size() == 1) {
+
+        // set new last segment opposite to the current snake direction
+        new_last_segment = m_snake.front();
+        switch(m_snake_direction) {
+            case DIRECTION_UP:
+                new_last_segment.at(0) += 1;
+                break;
+            case DIRECTION_DOWN:
+                new_last_segment.at(0) -= 1;
+                break;
+            case DIRECTION_LEFT:
+                new_last_segment.at(1) += 1;
+                break;
+            case DIRECTION_RIGHT:
+                new_last_segment.at(1) -= 1;
+                break;
+            default:
+
+                break;
+        }
+        m_snake.push_back(new_last_segment);
+        return;
+    }
+
+    std::array<int, 2> current_last_segment = m_snake.back();
+    m_snake.pop_back();
+
+
     // compare x values of last two segments
-    if(curr_last_segment.at(0) == m_snake.back().at(0)) {
+    if(current_last_segment.at(0) == m_snake.back().at(0)) {
 
         // snake is moving left, add new segment right of current last segment
-        if(curr_last_segment.at(1) > m_snake.back().at(1))
+        if(current_last_segment.at(1) > m_snake.back().at(1))
 
-            new_last_segment = {curr_last_segment.at(0), curr_last_segment.at(1) + 1};
+            new_last_segment = {current_last_segment.at(0), current_last_segment.at(1) + 1};
         // snake is moving right, add new segment left of current last segment
         else 
 
-            new_last_segment = {curr_last_segment.at(0), curr_last_segment.at(1) - 1};
+            new_last_segment = {current_last_segment.at(0), current_last_segment.at(1) - 1};
 
     // compare y values of last two segments
-    } else if (curr_last_segment.at(1) == m_snake.back().at(1)) {
+    } else if (current_last_segment.at(1) == m_snake.back().at(1)) {
 
         // snake is moving up, add new segment down from current last segment
-        if(curr_last_segment.at(0) > m_snake.back().at(0))
+        if(current_last_segment.at(0) > m_snake.back().at(0))
 
-            new_last_segment = {curr_last_segment.at(0) + 1, curr_last_segment.at(1)};
+            new_last_segment = {current_last_segment.at(0) + 1, current_last_segment.at(1)};
 
         // snake is moving down, add new segment up from current last segment
         else
 
-            new_last_segment = {curr_last_segment.at(0) - 1, curr_last_segment.at(1)};
+            new_last_segment = {current_last_segment.at(0) - 1, current_last_segment.at(1)};
     }
 
-    m_snake.push_back(curr_last_segment);
+    m_snake.push_back(current_last_segment);
     m_snake.push_back(new_last_segment);
 }
 

@@ -23,7 +23,10 @@
 // SEE THE LICENSE FOR THE SPECIFIC LANGUAGE GOVERNING PERMISSIONS AND
 // LIMITATIONS UNDER THE LICENSE.
 
+#include <thread>
+#include <chrono>
 #include <string>
+
 #include <ncurses.h>
 
 #include "../game/game.hpp"
@@ -145,11 +148,21 @@ bool Printer::StartGame() {
     nodelay(stdscr, false);
     wmove(win_game_space, 1, 1);
     static_cast<void> ( waddstr(win_game_space, ">WELCOME TO PROJECT SNAKE! BOCAN SOFTWARE'S IMPLEMENTATION OF THE CLASSIC GAME, SNAKE.") );
+    wrefresh(win_game_space);
+
+    std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+
     wmove(win_game_space, 2, 1);
     static_cast<void> ( waddstr(win_game_space, ">THE CURRENT HIGH SCORE IS ... MADE ON ...") );
-    wmove(win_game_space, 3, 1);
-    static_cast<void> ( waddstr(win_game_space, ">PRESS ANY KEY TO START... PRESS 'Q' ANYTIME TO QUIT...") );
     wrefresh(win_game_space);
+
+    std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+
+    wmove(win_game_space, 3, 1);
+    static_cast<void> ( waddstr(win_game_space, ">PRESS ANY KEY TO START THE GAME... PRESS 'Q' ANYTIME TO QUIT...") );
+    wrefresh(win_game_space);
+
+    static_cast<void> ( flushinp() );
 
     int ch = wgetch(win_game_space);
     nodelay(stdscr, true);
@@ -177,16 +190,31 @@ bool Printer::EndGame(int score) {
     nodelay(stdscr, false);
     wmove(win_game_space, 1, 1);
     static_cast<void> ( waddstr(win_game_space, ">GAME OVER.") );
+    wrefresh(win_game_space);
+
+    std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+
     wmove(win_game_space, 2, 1);
     static_cast<void> ( waddstr(win_game_space, ">YOUR SCORE IS ...") );
+    wrefresh(win_game_space);
+
+    std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+
     wmove(win_game_space, 3, 1);
     if(score > m_high_score) {
         static_cast<void> ( waddstr(win_game_space, ">YOU HAVE THE NEW HIGH SCORE!") );   
     } else {
         static_cast<void> ( waddstr(win_game_space, ">THE CURRENT HIGH SCORE IS ... MADE ON ...") );
     }
+    wrefresh(win_game_space);
+
+    std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+
     wmove(win_game_space, 4, 1);
-    static_cast<void> ( waddstr(win_game_space, ">PRESS ANY KEY TO PLAY AGAIN OR PRESS 'Q' TO QUIT.") );
+    static_cast<void> ( waddstr(win_game_space, ">PRESS ANY KEY TO RETURN TO START MENU OR PRESS 'Q' TO QUIT.") );
+    wrefresh(win_game_space);
+
+    static_cast<void> ( flushinp() );
 
     int ch = wgetch(win_game_space);
     nodelay(stdscr, true);
@@ -205,7 +233,42 @@ bool Printer::EndGame(int score) {
 /// @return:
 /// @todo:
 ///
-int Printer::GetUserInput() {
+void Printer::Pause() {
+
+    nodelay(stdscr, false);
+
+    int input;
+    do {
+        static_cast<void> ( flushinp() );
+        input = wgetch(win_game_space);
+    } while (static_cast<char> (input) != 'P' || static_cast<char> (input) != 'p');
+
+    nodelay(stdscr, true);
+}
+
+///
+/// @brief:
+/// @param:
+/// @return:
+/// @todo:
+///
+void Printer::Exit() {
+    
+    wmove(win_game_space, 5, 1);
+    static_cast<void> ( waddstr(win_game_space, ">EXITING...") );
+
+    wrefresh(win_game_space);
+
+    std::this_thread::sleep_for(std::chrono::milliseconds(1000)); 
+}
+
+///
+/// @brief:
+/// @param:
+/// @return:
+/// @todo:
+///
+int Printer::GetDirection() {
 
     int ch;
 
@@ -224,6 +287,9 @@ int Printer::GetUserInput() {
             case 'Y':
             case 'y':
                 return YES;
+            case 'P':
+            case 'p':
+                return PAUSE;
             case KEY_UP:
                 return DIRECTION_UP;    
             case KEY_DOWN:
@@ -298,7 +364,7 @@ void Printer::PrintScore(int score) {
     wmove(win_score, 2, 7);
     static_cast<void> ( waddstr(win_score, "SCORE: ") );
 
-    wmove(win_score, 2, 16);
+    wmove(win_score, 2, 15);
     static_cast<void> ( waddstr(win_score, score_str.c_str()) );
 
     wrefresh(win_score);
@@ -318,9 +384,6 @@ void Printer::PrintGameSpace(std::list<std::array<int, 2>> snake, std::array<int
     werase(win_game_space); 
     wborder(win_game_space, 0, 0, 0, 0, 0, 0, 0, 0);
 
-    // DEBUG print the size of the snake to the console
-    db_printer->Print(snake.size());
-
     // print the snake
     for(auto seg : snake) {
         wmove(win_game_space, seg[0], seg[1]);
@@ -330,7 +393,8 @@ void Printer::PrintGameSpace(std::list<std::array<int, 2>> snake, std::array<int
     // print the food
     wmove(win_game_space, food[0], food[1]);
     static_cast<void> ( waddch(win_game_space, '*') );
-
+    
+    // move cursor to the top left of the window
     wmove(win_game_space, 1, 1);
     wrefresh(win_game_space);
 

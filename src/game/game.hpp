@@ -35,6 +35,11 @@ namespace snake {
 
 class Printer;
 
+///
+/// @brief:
+/// @brief:
+/// @brief:
+///
 class Game {
 
 public:
@@ -51,11 +56,6 @@ private:
 
     Printer* printer;
 
-    /// @brief Data structure to represent the snake.
-    /// Snake is a list of arrays. 
-    /// Each array represents a snake segment's position on the screen.
-    /// std::array<int,2> = {y_position, x_position}
-    ///
     std::list<std::array<int, 2>> m_snake;
 
     std::array<int, 2> m_food;
@@ -64,9 +64,9 @@ private:
     const int k_game_space_w = 115;
     const int k_game_space_h = 35;
 
-    int m_points;
+    int m_score;
     int m_high_score;
-    int m_snake_dir;
+    int m_snake_direction;
 
     bool m_quit_flag;
 
