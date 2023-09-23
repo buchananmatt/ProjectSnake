@@ -37,7 +37,7 @@ class DebugPrinter;
 ///
 /// @brief
 /// @brief
-/// @brief
+/// @todo:  implement enum class here instead of enum
 ///
 enum user_input {
     QUIT = 0,

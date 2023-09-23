@@ -35,7 +35,7 @@ DebugPrinter::DebugPrinter() {
     initscr();
     cbreak();
     noecho();
-    keypad(win_debug, true);
+    keypad(win_debug, false);
     nodelay(win_debug, true);
 
     win_debug = newwin(m_debug.y_height, m_debug.x_length, m_debug.y_origin, m_debug.x_origin);
@@ -75,7 +75,7 @@ void DebugPrinter::Print(int message) {
 
     for(auto s : m_debug_queue) {
         wmove(win_debug, i, 1);                                                            
-        static_cast<void> ( waddch(win_debug, static_cast<char>(message)) );
+        static_cast<void> ( waddch(win_debug, message) );
         i++;
     }
     wrefresh(win_debug);

@@ -102,18 +102,18 @@ void Game::GameLoop() {
         // delay program to establish frame rate
         std::this_thread::sleep_for(std::chrono::milliseconds(k_frame_rate));
 
-        // get user input to change snake direction of movement
+        // get user input to change snake direction, quit or pause the game
+        direction = printer->GetDirection();
 
-        // check if user quit the game
-        if( (direction = printer->GetDirection()) == QUIT) {
-            m_quit_flag = true;
-            break;
-        
         // check if user paused the game
         if(direction == PAUSE) {
             printer->Pause();
-        }
 
+        // check if user quit the game
+        } else if(direction == QUIT) {
+            m_quit_flag = true;
+            break;
+        
         // if no user input, continue movement in current direction
         } else if(direction == ERROR) {
             MoveSnake();
@@ -159,7 +159,11 @@ void Game::GameLoop() {
 ///
 bool Game::EndGame() {
 
-    if(m_quit_flag) return true;
+    if(m_quit_flag) {
+        
+        printer->Exit();
+        return true;
+    }
     
     int input = printer->EndGame(m_score);
     

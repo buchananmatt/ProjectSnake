@@ -231,17 +231,17 @@ bool Printer::EndGame(int score) {
 /// @brief:
 /// @param:
 /// @return:
-/// @todo:
+/// @todo: not responding correctly to user keyboard inputs
 ///
 void Printer::Pause() {
 
     nodelay(stdscr, false);
 
     int input;
+    static_cast<void> ( flushinp() );
     do {
-        static_cast<void> ( flushinp() );
         input = wgetch(win_game_space);
-    } while (static_cast<char> (input) != 'P' || static_cast<char> (input) != 'p');
+    } while (input != 'p' && input != 'P');
 
     nodelay(stdscr, true);
 }
@@ -253,13 +253,16 @@ void Printer::Pause() {
 /// @todo:
 ///
 void Printer::Exit() {
-    
-    wmove(win_game_space, 5, 1);
+
+    werase(win_game_space);
+    wborder(win_game_space, 0, 0, 0, 0, 0, 0, 0, 0);
+
+    wmove(win_game_space, 1, 1);
     static_cast<void> ( waddstr(win_game_space, ">EXITING...") );
 
     wrefresh(win_game_space);
 
-    std::this_thread::sleep_for(std::chrono::milliseconds(1000)); 
+    std::this_thread::sleep_for(std::chrono::milliseconds(1500)); 
 }
 
 ///
@@ -389,6 +392,8 @@ void Printer::PrintGameSpace(std::list<std::array<int, 2>> snake, std::array<int
         wmove(win_game_space, seg[0], seg[1]);
         static_cast<void> ( waddch(win_game_space, '#') );
     }
+
+    db_printer->Print(snake.size());
 
     // print the food
     wmove(win_game_space, food[0], food[1]);
