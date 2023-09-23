@@ -35,8 +35,6 @@ namespace bocan {
 
 namespace snake {
 
-class DebugPrinter;
-
 ///
 /// @brief
 /// @brief
@@ -56,17 +54,15 @@ enum user_input {
 };
 
 ///
-/// @brief
-/// @brief
-/// @brief
+/// @class Printer
+/// @brief Provides the interface between the Game and the user. Prints game elements to the screen and receives keyboard input from the user.
+/// @brief Acts as the interface with the ncurses library. Responsible for reading and writing information to the savefile.
 ///
 class Printer {
 public:
 
     Printer();
     ~Printer();
-
-    bocan::snake::DebugPrinter* db_printer;
 
     void SetupScreen();
     void EndScreen();

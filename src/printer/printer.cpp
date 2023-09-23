@@ -32,11 +32,9 @@
 
 #include "../game/game.hpp"
 #include "../printer/printer.hpp"
-#include "../debug/debug_printer.hpp"
 
 using bocan::snake::Game;
 using bocan::snake::Printer;
-using bocan::snake::DebugPrinter;
 
 ///
 /// @brief  | 
@@ -45,9 +43,6 @@ using bocan::snake::DebugPrinter;
 /// @todo   |
 ///
 Printer::Printer() {
-
-    db_printer = new bocan::snake::DebugPrinter();
-
 
 } 
 
@@ -461,8 +456,6 @@ void Printer::PrintGameSpace(std::list<std::array<int, 2>> snake, std::array<int
         wmove(win_game_space, seg[0], seg[1]);
         static_cast<void> ( waddch(win_game_space, '#') );
     }
-
-    db_printer->Print(snake.size());
 
     // print the food
     wmove(win_game_space, food[0], food[1]);
