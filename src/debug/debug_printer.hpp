@@ -1,7 +1,7 @@
 // 
 // DEBUG.HPP [PROJECT SNAKE]
 // C++ VERSION GNU++14
-// macOS 11.7.9
+// macOS 11.7.10
 // DUAL-CORE INTEL CORE i5 @ 2.8 GHZ
 //
 // GITHUB REPOSITORY https://github.com/buchananmatt/ProjectSnake.git

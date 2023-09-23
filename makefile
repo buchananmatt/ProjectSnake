@@ -20,3 +20,9 @@ debug:
 	clang++ -std=gnu++14 -lncurses ./src/main.cpp ./src/game/game.cpp ./src/printer/printer.cpp ./src/debug/debug_printer.cpp -o ./bin/snake_debug.out
 
 clean:
+	rm ./src/*.o
+	rm ./game/*.o
+	rm ./printer/*.o
+
+run:
+	./bin/snake.out

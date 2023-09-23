@@ -1,7 +1,7 @@
 // 
 // PRINTER.HPP [PROJECT SNAKE]
 // C++ VERSION GNU++14
-// macOS 11.7.9
+// macOS 11.7.10
 // DUAL-CORE INTEL CORE i5 @ 2.8 GHZ
 //
 // GITHUB REPOSITORY https://github.com/buchananmatt/ProjectSnake.git
@@ -36,9 +36,9 @@ namespace bocan {
 namespace snake {
 
 ///
-/// @brief
-/// @brief
-/// @todo:  implement enum class here instead of enum
+/// @enum: User Input
+/// @brief: enumerators to represent various states of user input.
+/// @todo: implement enum class here instead of enum.
 ///
 enum user_input {
     QUIT = 0,
@@ -54,9 +54,10 @@ enum user_input {
 };
 
 ///
-/// @class Printer
-/// @brief Provides the interface between the Game and the user. Prints game elements to the screen and receives keyboard input from the user.
-/// @brief Acts as the interface with the ncurses library. Responsible for reading and writing information to the savefile.
+/// @class: Printer
+/// @brief: provides the interface between the Game and the user. prints game elements to the screen and receives keyboard input from the user.
+/// @brief: acts as the interface with the ncurses library. responsible for reading and writing information to the savefile.
+/// @todo: class object is currently allocated in Game on the heap. refactor to allocate on the stack and have direct access to Game private members.
 ///
 class Printer {
 public:

@@ -1,7 +1,7 @@
 // 
 // GAME.HPP [PROJECT SNAKE]
 // C++ VERSION GNU++14
-// macOS 11.7.9
+// macOS 11.7.10
 // DUAL-CORE INTEL CORE i5 @ 2.8 GHZ
 //
 // GITHUB REPOSITORY https://github.com/buchananmatt/ProjectSnake.git
@@ -36,10 +36,11 @@ namespace snake {
 class Printer;
 
 ///
-/// @class Game
-/// @brief Contains the implementation of gameplay features and mechanics.
-/// @brief Public Methods are the game functions called by the main function.
-/// @brief Game owns the Printer object and makes all method calls to this object.
+/// @class: Game
+/// @brief: contains the implementation of gameplay features and mechanics.
+/// @brief: public Methods are the game functions called by the main function.
+/// @brief: Game owns the Printer object and makes all method calls to this object.
+/// @todo: allocate Printer object on the stack and provide direct access to Game private members.
 ///
 class Game {
 

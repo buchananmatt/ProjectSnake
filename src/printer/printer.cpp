@@ -1,7 +1,7 @@
 // 
 // PRINTER.CPP [PROJECT SNAKE]
 // C++ VERSION GNU++14
-// macOS 11.7.9
+// macOS 11.7.10
 // DUAL-CORE INTEL CORE i5 @ 2.8 GHZ
 //
 // GITHUB REPOSITORY https://github.com/buchananmatt/ProjectSnake.git
@@ -37,33 +37,34 @@ using bocan::snake::Game;
 using bocan::snake::Printer;
 
 ///
-/// @brief  | 
-/// @param  |
-/// @return |
-/// @todo   |
+/// @brief: constructor method for the Printer class. initializations occur in the SetupScreen() function. 
+/// @param: none.
+/// @return: Printer object.
+/// @todo: none.
 ///
 Printer::Printer() {
 
 } 
 
 ///
-/// @brief:
-/// @param:
-/// @return:
-/// @todo:
+/// @brief: destructor method for the Printer class. memory is deallocated in the Exit() function.
+/// @param: none.
+/// @return: none.
+/// @todo: none.
 ///
 Printer::~Printer() {
 
 }
 
 ///
-/// @brief:
-/// @param:
-/// @return:
-/// @todo:
+/// @brief: initializes the screen windows and draws window borders.
+/// @param: none. 
+/// @return: none.
+/// @todo: define window size constants in printer.hpp to replace constants.
 ///
 void Printer::SetupScreen() {
 
+    // ncurses window setup
     initscr();
     cbreak();
     noecho();
@@ -71,17 +72,19 @@ void Printer::SetupScreen() {
     nodelay(stdscr, true);
 
     // total screen size ... columns x ... rows
-    // screen begins on column 10 and row 2
+    // screen begins on column ... and row ...
     win_title = newwin(5, 50, 1, 35);
     win_high_score = newwin(5, 25, 1, 2);
     win_score = newwin(5, 25, 1, 92);
     win_game_space = newwin(35, 115, 6, 2);
 
+    // draw borders around each window
     wborder(win_title, 0, 0, 0, 0, 0, 0, 0, 0);
     wborder(win_high_score, 0, 0, 0, 0, 0, 0, 0, 0);
     wborder(win_score, 0, 0, 0, 0, 0, 0, 0, 0);
     wborder(win_game_space, 0, 0, 0, 0, 0, 0, 0, 0);
 
+    // print each window
     PrintTitle();
     PrintHighScore();
     PrintScore(0);
@@ -91,10 +94,10 @@ void Printer::SetupScreen() {
 }
 
 ///
-/// @brief:
-/// @param:
-/// @return:
-/// @todo: 
+/// @brief: delete screen windows and deallocate memory.
+/// @param: none.
+/// @return: none.
+/// @todo: none.
 ///
 void Printer::EndScreen() {
 
@@ -107,10 +110,10 @@ void Printer::EndScreen() {
 }
 
 ///
-/// @brief:
-/// @param[in]:
-/// @return:
-/// @todo: 
+/// @brief: reprint contents of the title and score windows.
+/// @param[in]: current score as an integer, passed to the private method PrintScore(int).
+/// @return: none.
+/// @todo: none.
 ///
 void Printer::RefreshScreen(int score) {
 
@@ -121,11 +124,11 @@ void Printer::RefreshScreen(int score) {
 }
 
 ///
-/// @brief:
-/// @param[in]:
-/// @param[in];
-/// @return:
-/// @todo:
+/// @brief: reprint contents of the gamespace window. this function is called every frame to move the snake.
+/// @param[in]: snake as a linked-list of integer arrays. integer arrays represent each snake segment position in {column, row} from the left and top of the screen.
+/// @param[in]: food as an integer array. integer array represents the food position in {column, row} from the left and top of the screen.
+/// @return: none. 
+/// @todo: pass snake and food by const reference instead of by value to improve performance.
 ///
 void Printer::RefreshGameSpace(std::list<std::array<int, 2>> snake, std::array<int, 2> food) {
 
@@ -133,10 +136,10 @@ void Printer::RefreshGameSpace(std::list<std::array<int, 2>> snake, std::array<i
 }
 
 ///
-/// @brief:
-/// @param:
-/// @return:
-/// @todo:
+/// @brief: load the previous high score from the savefile. print the game start menu and receive user input.
+/// @param: none.
+/// @return: boolean true to start the game or boolean false if user quit the game.
+/// @todo: add input option to allow user to reset high score history.
 ///
 bool Printer::StartGame() {
     
@@ -156,7 +159,7 @@ bool Printer::StartGame() {
         m_load_stream.get(symbol);
     }
 
-    // load previous game records
+    // load the current high score
     m_load_stream >> m_high_score;
     m_load_stream >> m_player_name;
     m_load_stream >> m_snake_name;
@@ -166,6 +169,7 @@ bool Printer::StartGame() {
     werase(win_game_space);
     wborder(win_game_space, 0, 0, 0, 0, 0, 0, 0, 0);
 
+    // print the start menu
     nodelay(stdscr, false);
     wmove(win_game_space, 1, 1);
     static_cast<void> ( waddstr(win_game_space, ">PROJECT SNAKE [2023] [MATTHEW BUCHANAN] [BOCAN SOFTWARE]") );
@@ -210,10 +214,10 @@ bool Printer::StartGame() {
 }
 
 ///
-/// @brief:
-/// @param[in]:
-/// @return:
-/// @todo:
+/// @brief: checks for a new high score and records new high score to savefile. prints the end menu.
+/// @param[in]: current game score as an integer; used to compare against the previous high score.
+/// @return: boolean true if user quit the game, boolean false to return to the start menu
+/// @todo: none.
 ///
 bool Printer::EndGame(int score) {
     
@@ -221,6 +225,7 @@ bool Printer::EndGame(int score) {
     werase(win_game_space);
     wborder(win_game_space, 0, 0, 0, 0, 0, 0, 0, 0);
 
+    // print end game menu
     nodelay(stdscr, false);
     wmove(win_game_space, 1, 1);
     static_cast<void> ( waddstr(win_game_space, ">GAME OVER.") );
@@ -230,6 +235,7 @@ bool Printer::EndGame(int score) {
 
     std::string str_score = std::to_string(score);
 
+    // print out game score
     wmove(win_game_space, 2, 1);
     static_cast<void> ( waddstr(win_game_space, ">YOUR SCORE IS ") );
     static_cast<void> ( waddstr(win_game_space, str_score.c_str()) );
@@ -239,6 +245,8 @@ bool Printer::EndGame(int score) {
     std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 
     wmove(win_game_space, 3, 1);
+
+    // player has the new high score, record new high score in savefile
     if(m_high_score.empty() || score > std::stoi(m_high_score)) {
         echo();
         char c_player_name[20];
@@ -270,11 +278,18 @@ bool Printer::EndGame(int score) {
         wmove(win_game_space, 7, 1);
         static_cast<void> (waddstr(win_game_space, ">PRESS ANY KEY TO RETURN TO START MENU OR PRESS 'Q' TO QUIT.") );
 
+    // player did not beat the previous high score
     } else {
-        static_cast<void> ( waddstr(win_game_space, ">THE CURRENT HIGH SCORE IS ... MADE ON ...") );
+
+        static_cast<void> ( waddstr(win_game_space, ">CURRENT HIGH SCORE IS [") );
+        static_cast<void> ( waddstr(win_game_space, m_high_score.c_str()) );
+        static_cast<void> ( waddstr(win_game_space, "] BY PLAYER [") );
+        static_cast<void> ( waddstr(win_game_space, m_player_name.c_str()) );
+        static_cast<void> ( waddstr(win_game_space, "] AND SNAKE [") );
+        static_cast<void> ( waddstr(win_game_space, m_snake_name.c_str()) );
+        static_cast<void> ( waddstr(win_game_space, "].") );
         wmove(win_game_space, 4, 1);
         static_cast<void> ( waddstr(win_game_space, "PRESS ANY KEY TO RETURN TO START MENU OR PRESS 'Q' TO QUIT.") );
-        wrefresh(win_game_space);
     }
     wrefresh(win_game_space);
 
@@ -294,10 +309,11 @@ bool Printer::EndGame(int score) {
 }
 
 ///
-/// @brief:
-/// @param:
-/// @return:
-/// @todo: not responding correctly to user keyboard inputs
+/// @brief: continuous loop while game is paused, waits for user to unpause the game.
+/// @brief: side effect is to remain in function until user presses unpause command.
+/// @param: none.
+/// @return: none. 
+/// @todo: none.
 ///
 void Printer::Pause() {
 
@@ -305,6 +321,8 @@ void Printer::Pause() {
 
     int input;
     static_cast<void> ( flushinp() );
+    
+    // loop while waiting for user to unpause
     do {
         input = wgetch(win_game_space);
     } while (input != 'p' && input != 'P');
@@ -313,16 +331,18 @@ void Printer::Pause() {
 }
 
 ///
-/// @brief:
-/// @param:
-/// @return:
-/// @todo:
+/// @brief: prints message to alert to user the program is exiting.
+/// @param: none.
+/// @return: none.
+/// @todo: none.
 ///
 void Printer::Exit() {
 
+    // clear the gamespace window
     werase(win_game_space);
     wborder(win_game_space, 0, 0, 0, 0, 0, 0, 0, 0);
 
+    // print exit message
     wmove(win_game_space, 1, 1);
     static_cast<void> ( waddstr(win_game_space, ">EXITING...") );
 
@@ -332,15 +352,16 @@ void Printer::Exit() {
 }
 
 ///
-/// @brief:
-/// @param:
-/// @return:
-/// @todo:
+/// @brief: gets the user input during the main game loop. user can change direction of the snake, pause the game, or exit the game.
+/// @param: none.
+/// @return: integer represented by a user input enumerator.
+/// @todo: none.
 ///
 int Printer::GetDirection() {
 
     int ch;
 
+    // default state which means user has not pressed a key
     if( (ch = wgetch(stdscr)) == ERR) {
         return ERROR;
     }
@@ -374,16 +395,18 @@ int Printer::GetDirection() {
 }
 
 ///
-/// @brief:
-/// @param:
-/// @return:
-/// @todo:
+/// @brief: prints the game title window. does not update after initial print.
+/// @param: none.
+/// @return: none.
+/// @todo: none.
 ///
 void Printer::PrintTitle() {
 
+    // clear the window
     werase(win_title); 
     wborder(win_title, 0, 0, 0, 0, 0, 0, 0, 0);
 
+    // print the game title
     wmove(win_title, 1, 19);
     static_cast<void> ( waddstr(win_title, "PROJECT SNAKE") );
 
@@ -395,16 +418,18 @@ void Printer::PrintTitle() {
 }
 
 ///
-/// @brief:
-/// @param:
-/// @return:
-/// @todo:
+/// @brief: prints the current high score loaded in from the savefile.
+/// @param: none.
+/// @return: none.
+/// @todo: none.
 ///
 void Printer::PrintHighScore() {
 
+    // clear the window
     werase(win_high_score); 
     wborder(win_high_score, 0, 0, 0, 0, 0, 0, 0, 0);
 
+    // print the score
     wmove(win_high_score, 2, 5);
     static_cast<void> ( waddstr(win_high_score, "HIGH SCORE: ") );
 
@@ -416,18 +441,21 @@ void Printer::PrintHighScore() {
 }
 
 ///
-/// @brief:
-/// @param[in]:
-/// @return:
-/// @todo:
+/// @brief: prints the score for the current game during the main gameloop.
+/// @param[in]: score for the current game as an integer.
+/// @return: none.
+/// @todo: none.
 ///
 void Printer::PrintScore(int score) {
 
+    // convert integer score to a string
     std::string score_str = std::to_string(score);
 
+    // clear the window
     werase(win_score); 
     wborder(win_score, 0, 0, 0, 0, 0, 0, 0, 0);
 
+    // print the score
     wmove(win_score, 2, 7);
     static_cast<void> ( waddstr(win_score, "SCORE: ") );
 
@@ -439,11 +467,11 @@ void Printer::PrintScore(int score) {
 }
 
 ///
-/// @brief:    
-/// @param[in]:
-/// @param[in]:
-/// @return:   
-/// @todo:      pass arguments by reference or provide access to game members directly
+/// @brief: prints the main gameplay window once per frame to upate snake position.
+/// @param[in]: @see Printer::RefreshGameSpace()
+/// @param[in]: @see Printer::RefreshGameSpace()
+/// @return: none.
+/// @todo: @see Printer::RefreshGameSpace()
 /// 
 void Printer::PrintGameSpace(std::list<std::array<int, 2>> snake, std::array<int, 2> food) {
 

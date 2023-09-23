@@ -1,7 +1,7 @@
 // 
 // GAME.CPP [PROJECT SNAKE]
 // C++ VERSION GNU++14
-// macOS 11.7.9
+// macOS 11.7.10
 // DUAL-CORE INTEL CORE i5 @ 2.8 GHZ
 //
 // GITHUB REPOSITORY https://github.com/buchananmatt/ProjectSnake.git
@@ -36,10 +36,10 @@ using bocan::snake::Game;
 using bocan::snake::Printer;
 
 ///
-/// @brief:  Constructor for the Game class object.
-/// @param: 
-/// @return: Game object instance. Only one instance is initialized in the main function.
-/// @todo:
+/// @brief: constructor for the Game class object.
+/// @param: none.
+/// @return: Game object instance. only one instance is initialized in the main function.
+/// @todo: none.
 ///
 Game::Game() {
 
@@ -52,10 +52,10 @@ Game::Game() {
 }
 
 ///
-/// @brief:  Destructor for the Game class object.
-/// @param:
-/// @return: 
-/// @todo: 
+/// @brief: destructor for the Game class object.
+/// @param: none.
+/// @return: none.
+/// @todo: none.
 ///
 Game::~Game() {
 
@@ -65,10 +65,10 @@ Game::~Game() {
 }
 
 ///
-/// @brief:  
-/// @param:
-/// @return:
-/// @todo:
+/// @brief: sets the current score to zero and calls the printer->StartGame() function to print the start menu and receive user input.
+/// @param: none.
+/// @return: none.
+/// @todo: none.
 ///
 void Game::Start() {
 
@@ -82,10 +82,10 @@ void Game::Start() {
 }
 
 ///
-/// @brief:
-/// @param:
-/// @return:
-/// @todo:
+/// @brief: main game loop. refreshes at a set constant frame rate to move the snake, generate food and snake positions, and refresh the screen.
+/// @param: none.
+/// @return: none.
+/// @todo: none.
 ///
 void Game::GameLoop() {
 
@@ -152,10 +152,10 @@ void Game::GameLoop() {
 }
 
 ///
-/// @brief:
-/// @param:
-/// @return:
-/// @todo:
+/// @brief: check if user quit the game. calls printer->EndGame() to print the end game menu and receive user input.
+/// @param: none.
+/// @return: boolean true if user quit the game, boolean false to return to the start menu.
+/// @todo: none.
 ///
 bool Game::EndGame() {
 
@@ -174,10 +174,10 @@ bool Game::EndGame() {
 }
 
 ///
-/// @brief:
-/// @param:
-/// @return:
-/// @todo:
+/// @brief: generates the snake for the beginning of the game in the middle of the game space window.
+/// @param: none.
+/// @return: none.
+/// @todo: link game space constants in Game to the window constants in Printer.
 ///
 void Game::GenerateSnake() {
     
@@ -192,10 +192,10 @@ void Game::GenerateSnake() {
 }
 
 ///
-/// @brief:
-/// @param:
-/// @return:
-/// @todo:
+/// @brief: generates the food at a random location within the game space
+/// @param: none.
+/// @return: none.
+/// @todo: none.
 ///
 void Game::GenerateFood() {
 
@@ -208,10 +208,10 @@ void Game::GenerateFood() {
 }
 
 ///
-/// @brief:
-/// @param:
-/// @return:
-/// @todo:
+/// @brief: moves the snake in the current snake direction by popping segment of the end and pushing back at the beginning.
+/// @param: none.
+/// @return: none.
+/// @todo: fix bug which causes segments to "leak" on the game space during portions of game play.
 ///
 void Game::MoveSnake() {
 
@@ -243,10 +243,10 @@ void Game::MoveSnake() {
 }
 
 ///
-/// @brief:
-/// @param:
-/// @return:
-/// @todo:
+/// @brief: checks if the front of the snake has collided with the food
+/// @param: none.
+/// @return: boolean true if the front of the snake and the food share the same position, false if they do not
+/// @todo: none.
 ///
 bool Game::FoodCollision() {
 
@@ -257,10 +257,10 @@ bool Game::FoodCollision() {
 }
 
 ///
-/// @brief:
-/// @param:
-/// @return:
-/// @todo:
+/// @brief: increases the size of the snake by one segment.
+/// @param: none.
+/// @return: none.
+/// @todo: none.
 ///
 void Game::IncreaseSnakeSize() {
 
@@ -327,10 +327,10 @@ void Game::IncreaseSnakeSize() {
 }
 
 ///
-/// @brief:
-/// @param:
-/// @return:
-/// @todo:
+/// @brief: checks for a collision between the snake and the game space boundary or between different snake segments.
+/// @param: none.
+/// @return: boolean true if a collision is detected, false if no collision is detected.
+/// @todo: none.
 ///
 bool Game::CollisionDetect() {
 
