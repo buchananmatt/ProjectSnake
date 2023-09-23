@@ -25,19 +25,6 @@
 
 #include "./game/game.hpp"
 
-///
-/// @namespace bocan is the namespace used for all bocan software projects.
-///
-///
-namespace bocan {}
-
-///
-/// @namespace snake is the namespace used for this particular project.
-///
-///
-namespace snake {}
-
-
 int main(int argc, char** argv) {
 
     bocan::snake::Game game;

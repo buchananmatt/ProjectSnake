@@ -26,6 +26,7 @@
 #include <thread>
 #include <chrono>
 #include <string>
+#include <fstream>
 
 #include <ncurses.h>
 
@@ -47,6 +48,7 @@ Printer::Printer() {
 
     db_printer = new bocan::snake::DebugPrinter();
 
+
 } 
 
 ///
@@ -55,7 +57,9 @@ Printer::Printer() {
 /// @return:
 /// @todo:
 ///
-Printer::~Printer() {}
+Printer::~Printer() {
+
+}
 
 ///
 /// @brief:
@@ -140,6 +144,28 @@ void Printer::RefreshGameSpace(std::list<std::array<int, 2>> snake, std::array<i
 /// @todo:
 ///
 bool Printer::StartGame() {
+    
+    // load save file
+    m_load_stream.open(m_save_file, std::ios::in);
+
+    // find last line of savefile
+    m_load_stream.seekg(0, std::ios_base::end);
+    char symbol = ' ';
+    while (symbol != '\n') {
+        m_load_stream.seekg(-2, std::ios_base::cur);
+
+        if ((int)m_load_stream.tellg() == 0) {
+            m_load_stream.seekg(0);
+            break;
+        }
+        m_load_stream.get(symbol);
+    }
+
+    // load previous game records
+    m_load_stream >> m_high_score;
+    m_load_stream >> m_player_name;
+    m_load_stream >> m_snake_name;
+    m_load_stream.close();
 
     // clear the screen
     werase(win_game_space);
@@ -147,13 +173,24 @@ bool Printer::StartGame() {
 
     nodelay(stdscr, false);
     wmove(win_game_space, 1, 1);
-    static_cast<void> ( waddstr(win_game_space, ">WELCOME TO PROJECT SNAKE! BOCAN SOFTWARE'S IMPLEMENTATION OF THE CLASSIC GAME, SNAKE.") );
+    static_cast<void> ( waddstr(win_game_space, ">PROJECT SNAKE [2023] [MATTHEW BUCHANAN] [BOCAN SOFTWARE]") );
     wrefresh(win_game_space);
+    PrintHighScore();
 
     std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 
     wmove(win_game_space, 2, 1);
-    static_cast<void> ( waddstr(win_game_space, ">THE CURRENT HIGH SCORE IS ... MADE ON ...") );
+    if (!m_high_score.empty()) {
+        static_cast<void> ( waddstr(win_game_space, ">CURRENT HIGH SCORE IS [") );
+        static_cast<void> ( waddstr(win_game_space, m_high_score.c_str()) );
+        static_cast<void> ( waddstr(win_game_space, "] BY PLAYER [") );
+        static_cast<void> ( waddstr(win_game_space, m_player_name.c_str()) );
+        static_cast<void> ( waddstr(win_game_space, "] AND SNAKE [") );
+        static_cast<void> ( waddstr(win_game_space, m_snake_name.c_str()) );
+        static_cast<void> ( waddstr(win_game_space, "].") );
+    } else {
+        static_cast<void> ( waddstr(win_game_space, ">NO PREVIOUS HIGH SCORE DATA AVAILABLE.") );
+    }
     wrefresh(win_game_space);
 
     std::this_thread::sleep_for(std::chrono::milliseconds(1000));
@@ -162,8 +199,10 @@ bool Printer::StartGame() {
     static_cast<void> ( waddstr(win_game_space, ">PRESS ANY KEY TO START THE GAME... PRESS 'Q' ANYTIME TO QUIT...") );
     wrefresh(win_game_space);
 
+    // flush input buffer
     static_cast<void> ( flushinp() );
 
+    // get user input
     int ch = wgetch(win_game_space);
     nodelay(stdscr, true);
     switch(ch) {
@@ -194,25 +233,57 @@ bool Printer::EndGame(int score) {
 
     std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 
+    std::string str_score = std::to_string(score);
+
     wmove(win_game_space, 2, 1);
-    static_cast<void> ( waddstr(win_game_space, ">YOUR SCORE IS ...") );
+    static_cast<void> ( waddstr(win_game_space, ">YOUR SCORE IS ") );
+    static_cast<void> ( waddstr(win_game_space, str_score.c_str()) );
+    static_cast<void> ( waddstr(win_game_space, ".") );
     wrefresh(win_game_space);
 
     std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 
     wmove(win_game_space, 3, 1);
-    if(score > m_high_score) {
-        static_cast<void> ( waddstr(win_game_space, ">YOU HAVE THE NEW HIGH SCORE!") );   
+    if(m_high_score.empty() || score > std::stoi(m_high_score)) {
+        echo();
+        char c_player_name[20];
+        char c_snake_name[20];
+        static_cast<void> ( waddstr(win_game_space, ">YOU HAVE THE NEW HIGH SCORE!") );
+        wmove(win_game_space, 4, 1);
+        static_cast<void> ( waddstr(win_game_space, ">PLAYER NAME: ") );
+        wrefresh(win_game_space);
+        static_cast<void> ( wgetnstr(win_game_space, c_player_name, 20) );
+        wmove(win_game_space, 5, 1);
+        static_cast<void> ( waddstr(win_game_space, ">SNAKE NAME: ") );
+        wrefresh(win_game_space);
+        static_cast<void> ( wgetnstr(win_game_space, c_snake_name, 20) );
+        noecho();
+        m_high_score = std::to_string(score);
+        m_player_name = std::string(c_player_name);
+        m_snake_name = std::string(c_snake_name);
+
+        m_save_stream.open(m_save_file, std::ios::out | std::ios::app);
+        m_save_stream << std::endl;
+        m_save_stream << m_high_score << " ";
+        m_save_stream << m_player_name << " ";
+        m_save_stream << m_snake_name;
+        m_save_stream.close();
+
+        wmove(win_game_space, 6, 1);
+        static_cast<void> ( waddstr(win_game_space, ">NEW HIGH SCORE SAVED!") );
+
+        wmove(win_game_space, 7, 1);
+        static_cast<void> (waddstr(win_game_space, ">PRESS ANY KEY TO RETURN TO START MENU OR PRESS 'Q' TO QUIT.") );
+
     } else {
         static_cast<void> ( waddstr(win_game_space, ">THE CURRENT HIGH SCORE IS ... MADE ON ...") );
+        wmove(win_game_space, 4, 1);
+        static_cast<void> ( waddstr(win_game_space, "PRESS ANY KEY TO RETURN TO START MENU OR PRESS 'Q' TO QUIT.") );
+        wrefresh(win_game_space);
     }
     wrefresh(win_game_space);
 
     std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-
-    wmove(win_game_space, 4, 1);
-    static_cast<void> ( waddstr(win_game_space, ">PRESS ANY KEY TO RETURN TO START MENU OR PRESS 'Q' TO QUIT.") );
-    wrefresh(win_game_space);
 
     static_cast<void> ( flushinp() );
 
@@ -336,8 +407,6 @@ void Printer::PrintTitle() {
 ///
 void Printer::PrintHighScore() {
 
-    std::string high_score_str = std::to_string(m_high_score);
-
     werase(win_high_score); 
     wborder(win_high_score, 0, 0, 0, 0, 0, 0, 0, 0);
 
@@ -345,7 +414,7 @@ void Printer::PrintHighScore() {
     static_cast<void> ( waddstr(win_high_score, "HIGH SCORE: ") );
 
     wmove(win_high_score, 2, 18);
-    static_cast<void> ( waddstr(win_high_score, high_score_str.c_str()) );
+    static_cast<void> ( waddstr(win_high_score, m_high_score.c_str()) );
 
     wrefresh(win_high_score);
 

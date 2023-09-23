@@ -26,6 +26,9 @@
 #ifndef PRINTER_HPP
 #define PRINTER_HPP
 
+#include <string>
+#include <fstream>
+
 #include <ncurses.h>
 
 namespace bocan {
@@ -86,7 +89,13 @@ private:
     WINDOW* win_score;
     WINDOW* win_game_space;
 
-    int m_high_score = 80;
+    std::ifstream m_load_stream;
+    std::ofstream m_save_stream;
+    std::string m_save_file = { "./save/savefile" };
+
+    std::string m_high_score;
+    std::string m_player_name;
+    std::string m_snake_name;
 
 private:
 

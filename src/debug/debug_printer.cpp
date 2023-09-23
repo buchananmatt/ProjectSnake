@@ -58,7 +58,7 @@ DebugPrinter::~DebugPrinter() {
 
 void DebugPrinter::Print(int message) {
 
-    m_debug_queue.push_back(message);
+    m_debug_queue.push_back(message-'0');
 
     while(m_debug_queue.size() > m_max_queue_size) {
 
