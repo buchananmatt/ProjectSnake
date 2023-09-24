@@ -1,0 +1,74 @@
+\doxysection{debug\+\_\+printer.\+hpp}
+\hypertarget{debug__printer_8hpp_source}{}\label{debug__printer_8hpp_source}\index{src/debug/debug\_printer.hpp@{src/debug/debug\_printer.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//\ }}
+\DoxyCodeLine{00002\ \textcolor{comment}{//\ DEBUG.HPP\ [PROJECT\ SNAKE]}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//\ C++\ VERSION\ GNU++14}}
+\DoxyCodeLine{00004\ \textcolor{comment}{//\ macOS\ 11.7.10}}
+\DoxyCodeLine{00005\ \textcolor{comment}{//\ DUAL-\/CORE\ INTEL\ CORE\ i5\ @\ 2.8\ GHZ}}
+\DoxyCodeLine{00006\ \textcolor{comment}{//}}
+\DoxyCodeLine{00007\ \textcolor{comment}{//\ GITHUB\ REPOSITORY\ https://github.com/buchananmatt/ProjectSnake.git}}
+\DoxyCodeLine{00008\ \textcolor{comment}{//}}
+\DoxyCodeLine{00009\ \textcolor{comment}{//\ THIS\ PROJECT\ IS\ DOCUMENTED\ WITH\ DOXYGEN.\ SEE\ DOCUMENTATION\ AT\ BELOW\ SITE.}}
+\DoxyCodeLine{00010\ \textcolor{comment}{//\ https://htmlpreview.github.io/?https://github.com/buchananmatt/ProjectSnake/blob/master/doc/html/index.html}}
+\DoxyCodeLine{00011\ \textcolor{comment}{//}}
+\DoxyCodeLine{00012\ \textcolor{comment}{//\ COPYRIGHT\ [2023]\ [MATTHEW\ T.\ BUCHANAN]\ [BOCAN\ SOFTWARE]}}
+\DoxyCodeLine{00013\ \textcolor{comment}{//}}
+\DoxyCodeLine{00014\ \textcolor{comment}{//\ LICENSED\ UNDER\ THE\ APACHE\ LICENSE,\ VERSION\ 2.0\ (THE\ "{}LICENSE"{});}}
+\DoxyCodeLine{00015\ \textcolor{comment}{//\ YOU\ MAY\ NOT\ USE\ THIS\ FILE\ EXCEPT\ IN\ COMPLIANCE\ WITH\ THE\ LICENSE.}}
+\DoxyCodeLine{00016\ \textcolor{comment}{//\ YOU\ MAY\ OBTAIN\ A\ COPY\ OF\ THE\ LICENSE\ AT\ }}
+\DoxyCodeLine{00017\ \textcolor{comment}{//}}
+\DoxyCodeLine{00018\ \textcolor{comment}{//\ http://www.apacher.org/licenses.LICENSE-\/2.0}}
+\DoxyCodeLine{00019\ \textcolor{comment}{//}}
+\DoxyCodeLine{00020\ \textcolor{comment}{//\ UNLESS\ REQUIRED\ BY\ APPLICABLE\ LAW\ OR\ AGREED\ TO\ IN\ WRITING,\ SOFTWARE}}
+\DoxyCodeLine{00021\ \textcolor{comment}{//\ DISTRIBUTED\ UNDER\ THE\ LICENSE\ IS\ DISTRIBUTED\ ON\ AN\ "{}AS\ IS"{}\ BASIS,}}
+\DoxyCodeLine{00022\ \textcolor{comment}{//\ WITHOUT\ WARRANTIES\ OR\ CONDITIONS\ OF\ ANY\ KIND,\ EITHER\ EXPRESS\ OR\ IMPLIED.}}
+\DoxyCodeLine{00023\ \textcolor{comment}{//\ SEE\ THE\ LICENSE\ FOR\ THE\ SPECIFIC\ LANGUAGE\ GOVERNING\ PERMISSIONS\ AND}}
+\DoxyCodeLine{00024\ \textcolor{comment}{//\ LIMITATIONS\ UNDER\ THE\ LICENSE.}}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#ifndef\ DEBUG\_HPP}}
+\DoxyCodeLine{00027\ \textcolor{preprocessor}{\#define\ DEBUG\_HPP}}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\#include\ <deque>}}
+\DoxyCodeLine{00030\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00031\ \textcolor{preprocessor}{\#include\ <array>}}
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\#include\ <list>}}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \textcolor{preprocessor}{\#include\ <ncurses.h>}}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \textcolor{keyword}{namespace\ }bocan\ \{}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \textcolor{keyword}{namespace\ }snake\ \{}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00044\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classbocan_1_1snake_1_1_debug_printer}{DebugPrinter}}\ \{}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00047\ \ \ \ \ \mbox{\hyperlink{classbocan_1_1snake_1_1_debug_printer}{DebugPrinter}}();}
+\DoxyCodeLine{00048\ \ \ \ \ \mbox{\hyperlink{classbocan_1_1snake_1_1_debug_printer}{\string~DebugPrinter}}();}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordtype}{void}\ Print(\textcolor{keywordtype}{int});}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \ \ \ \ WINDOW*\ win\_debug;}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \ \ \ \ std::deque<int>\ m\_debug\_queue;}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keywordtype}{int}\ m\_max\_queue\_size\ =\ 35;}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structbocan_1_1snake_1_1_debug_printer_1_1window__size}{window\_size}}\ \{}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ y\_origin\ =\ 1;}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ x\_origin\ =\ 120;}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ y\_height\ =\ 40;}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ x\_length\ =\ 45;}
+\DoxyCodeLine{00065\ \ \ \ \ \}\ m\_debug;}
+\DoxyCodeLine{00066\ \};}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \}\ \textcolor{comment}{//\ NAMESPACE\ SNAKE}}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00070\ \}\ \textcolor{comment}{//\ NAMESPACE\ BOCAN}}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00072\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ DEBUG\_HPP}}
+
+\end{DoxyCode}

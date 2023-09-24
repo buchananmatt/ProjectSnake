@@ -252,6 +252,8 @@ bool Printer::EndGame(int score) {
         char c_player_name[20];
         char c_snake_name[20];
         static_cast<void> ( waddstr(win_game_space, ">YOU HAVE THE NEW HIGH SCORE!") );
+        
+        static_cast<void> ( flushinp() );
         wmove(win_game_space, 4, 1);
         static_cast<void> ( waddstr(win_game_space, ">PLAYER NAME: ") );
         wrefresh(win_game_space);

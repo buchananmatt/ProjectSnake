@@ -1,32 +1,415 @@
 \doxysection{bocan\+::snake\+::Printer Class Reference}
 \hypertarget{classbocan_1_1snake_1_1_printer}{}\label{classbocan_1_1snake_1_1_printer}\index{bocan::snake::Printer@{bocan::snake::Printer}}
+
+
+\+: provides the interface between the \doxylink{classbocan_1_1snake_1_1_game}{Game} and the user. prints game elements to the screen and receives keyboard input from the user.  
+
+
+
+
+{\ttfamily \#include $<$printer.\+hpp$>$}
+
 \doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\Hypertarget{classbocan_1_1snake_1_1_printer_ac12cf98597aae1e32b651b7da9c7a7a3}\label{classbocan_1_1snake_1_1_printer_ac12cf98597aae1e32b651b7da9c7a7a3} 
-void {\bfseries Setup\+Screen} ()
+\mbox{\hyperlink{classbocan_1_1snake_1_1_printer_a1aba91ebff40aebda570d92f17f28b27}{Printer}} ()
+\begin{DoxyCompactList}\small\item\em \+: constructor method for the \doxylink{classbocan_1_1snake_1_1_printer}{Printer} class. initializations occur in the \doxylink{classbocan_1_1snake_1_1_printer_ac12cf98597aae1e32b651b7da9c7a7a3}{Setup\+Screen()} function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classbocan_1_1snake_1_1_printer_a011da1d2aa31df5440071c0b6e80eb1d}{\texorpdfstring{$\sim$}{\string~}\+Printer}} ()
+\begin{DoxyCompactList}\small\item\em \+: destructor method for the \doxylink{classbocan_1_1snake_1_1_printer}{Printer} class. memory is deallocated in the \doxylink{classbocan_1_1snake_1_1_printer_a628913c5a1765a013d3a5db4e7dba24a}{Exit()} function. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classbocan_1_1snake_1_1_printer_ac12cf98597aae1e32b651b7da9c7a7a3}{Setup\+Screen}} ()
+\begin{DoxyCompactList}\small\item\em \+: initializes the screen windows and draws window borders. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classbocan_1_1snake_1_1_printer_a5a415acac8ecfddd9b33e8e575a611a1}{End\+Screen}} ()
+\begin{DoxyCompactList}\small\item\em \+: delete screen windows and deallocate memory. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classbocan_1_1snake_1_1_printer_a695ce84bafb85394adb69f9f8540aed4}{Refresh\+Screen}} (int)
+\begin{DoxyCompactList}\small\item\em \+: reprint contents of the title and score windows. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classbocan_1_1snake_1_1_printer_a5688d3095fa7bb74abfbcd950639a200}{Refresh\+Game\+Space}} (std\+::list$<$ std\+::array$<$ int, 2 $>$ $>$, std\+::array$<$ int, 2 $>$)
+\begin{DoxyCompactList}\small\item\em \+: reprint contents of the gamespace window. this function is called every frame to move the snake. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classbocan_1_1snake_1_1_printer_a4dec5029da2ca69959a2a44c7801fb70}{Start\+Game}} ()
+\begin{DoxyCompactList}\small\item\em \+: load the previous high score from the savefile. print the game start menu and receive user input. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classbocan_1_1snake_1_1_printer_ae0e1ccd27d1f955c139e9f2ee8c00c20}{End\+Game}} (int)
+\begin{DoxyCompactList}\small\item\em \+: checks for a new high score and records new high score to savefile. prints the end menu. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classbocan_1_1snake_1_1_printer_a9c251709156c2ff89d649d9f53864832}{Pause}} ()
+\begin{DoxyCompactList}\small\item\em \+: continuous loop while game is paused, waits for user to unpause the game. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classbocan_1_1snake_1_1_printer_a628913c5a1765a013d3a5db4e7dba24a}{Exit}} ()
+\begin{DoxyCompactList}\small\item\em \+: prints message to alert to user the program is exiting. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classbocan_1_1snake_1_1_printer_a61286e700728df51cfd9ad4022763828}{Get\+Direction}} ()
+\begin{DoxyCompactList}\small\item\em \+: gets the user input during the main game loop. user can change direction of the snake, pause the game, or exit the game. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
 \item 
-\Hypertarget{classbocan_1_1snake_1_1_printer_a5a415acac8ecfddd9b33e8e575a611a1}\label{classbocan_1_1snake_1_1_printer_a5a415acac8ecfddd9b33e8e575a611a1} 
-void {\bfseries End\+Screen} ()
+void \mbox{\hyperlink{classbocan_1_1snake_1_1_printer_ab9130e2306e02b310c8467be627cab32}{Print\+Title}} ()
+\begin{DoxyCompactList}\small\item\em \+: prints the game title window. does not update after initial print. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classbocan_1_1snake_1_1_printer_a6b80c58e18895a5b1f3c55299e56ac72}{Print\+High\+Score}} ()
+\begin{DoxyCompactList}\small\item\em \+: prints the current high score loaded in from the savefile. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classbocan_1_1snake_1_1_printer_a91b9cb1da21d44872e1ae7b20b6c4484}{Print\+Score}} (int)
+\begin{DoxyCompactList}\small\item\em \+: prints the score for the current game during the main gameloop. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classbocan_1_1snake_1_1_printer_a250cffd120e0e4ecfd742067be2a8115}{Print\+Game\+Space}} (std\+::list$<$ std\+::array$<$ int, 2 $>$ $>$, std\+::array$<$ int, 2 $>$)
+\begin{DoxyCompactList}\small\item\em \+: prints the main gameplay window once per frame to upate snake position. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
 \item 
-\Hypertarget{classbocan_1_1snake_1_1_printer_a24ba194ca0340ce6fed58af6d9d62fbd}\label{classbocan_1_1snake_1_1_printer_a24ba194ca0340ce6fed58af6d9d62fbd} 
-void {\bfseries Refresh\+Screen} ()
+\Hypertarget{classbocan_1_1snake_1_1_printer_a3b1bbd34725643c8e621b5279afad78f}\label{classbocan_1_1snake_1_1_printer_a3b1bbd34725643c8e621b5279afad78f} 
+WINDOW \texorpdfstring{$\ast$}{*} {\bfseries win\+\_\+title}
 \item 
-\Hypertarget{classbocan_1_1snake_1_1_printer_a78ed6426efbde32f23004396794844ff}\label{classbocan_1_1snake_1_1_printer_a78ed6426efbde32f23004396794844ff} 
-void {\bfseries Refresh\+Game\+Space} ()
+\Hypertarget{classbocan_1_1snake_1_1_printer_ab5265ae36d53c755681bf5d4eaa44060}\label{classbocan_1_1snake_1_1_printer_ab5265ae36d53c755681bf5d4eaa44060} 
+WINDOW \texorpdfstring{$\ast$}{*} {\bfseries win\+\_\+high\+\_\+score}
 \item 
-\Hypertarget{classbocan_1_1snake_1_1_printer_a064b9a5e1a7b5c3f801aebfd92e597d5}\label{classbocan_1_1snake_1_1_printer_a064b9a5e1a7b5c3f801aebfd92e597d5} 
-void {\bfseries Refresh\+Points} ()
+\Hypertarget{classbocan_1_1snake_1_1_printer_a6dffcd5f63fb72c1408bd54ac79cf2f8}\label{classbocan_1_1snake_1_1_printer_a6dffcd5f63fb72c1408bd54ac79cf2f8} 
+WINDOW \texorpdfstring{$\ast$}{*} {\bfseries win\+\_\+score}
 \item 
-\Hypertarget{classbocan_1_1snake_1_1_printer_a68ce6d7d5427e18fc7f00f7980d77512}\label{classbocan_1_1snake_1_1_printer_a68ce6d7d5427e18fc7f00f7980d77512} 
-void {\bfseries Start\+Game} ()
+\Hypertarget{classbocan_1_1snake_1_1_printer_af0e81a16060132d9adc05f56cd16373f}\label{classbocan_1_1snake_1_1_printer_af0e81a16060132d9adc05f56cd16373f} 
+WINDOW \texorpdfstring{$\ast$}{*} {\bfseries win\+\_\+game\+\_\+space}
 \item 
-\Hypertarget{classbocan_1_1snake_1_1_printer_a313c55e9f7d3f096b67f77d6563c8d66}\label{classbocan_1_1snake_1_1_printer_a313c55e9f7d3f096b67f77d6563c8d66} 
-void {\bfseries End\+Game} ()
+\Hypertarget{classbocan_1_1snake_1_1_printer_ae6fa29e938140676567d43931cea8d8d}\label{classbocan_1_1snake_1_1_printer_ae6fa29e938140676567d43931cea8d8d} 
+std\+::ifstream {\bfseries m\+\_\+load\+\_\+stream}
 \item 
-\Hypertarget{classbocan_1_1snake_1_1_printer_a8a0d63ca4a6a290a93356cea735bc9ef}\label{classbocan_1_1snake_1_1_printer_a8a0d63ca4a6a290a93356cea735bc9ef} 
-int {\bfseries Get\+User\+Input} ()
+\Hypertarget{classbocan_1_1snake_1_1_printer_a4432cf2fc96c11819090fdc7b58335eb}\label{classbocan_1_1snake_1_1_printer_a4432cf2fc96c11819090fdc7b58335eb} 
+std\+::ofstream {\bfseries m\+\_\+save\+\_\+stream}
+\item 
+\Hypertarget{classbocan_1_1snake_1_1_printer_a1544ae69baa3b0a37392760d29ba6d24}\label{classbocan_1_1snake_1_1_printer_a1544ae69baa3b0a37392760d29ba6d24} 
+std\+::string {\bfseries m\+\_\+save\+\_\+file} = \{ "{}./save/savefile"{} \}
+\item 
+\Hypertarget{classbocan_1_1snake_1_1_printer_a1add7c5059c3e353cc32e866b021d076}\label{classbocan_1_1snake_1_1_printer_a1add7c5059c3e353cc32e866b021d076} 
+std\+::string {\bfseries m\+\_\+high\+\_\+score}
+\item 
+\Hypertarget{classbocan_1_1snake_1_1_printer_aa746fb9900ad52660b54148c823e2426}\label{classbocan_1_1snake_1_1_printer_aa746fb9900ad52660b54148c823e2426} 
+std\+::string {\bfseries m\+\_\+player\+\_\+name}
+\item 
+\Hypertarget{classbocan_1_1snake_1_1_printer_ad7d5c123a3323cfe9a1acbf9449794a1}\label{classbocan_1_1snake_1_1_printer_ad7d5c123a3323cfe9a1acbf9449794a1} 
+std\+::string {\bfseries m\+\_\+snake\+\_\+name}
 \end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\+: provides the interface between the \doxylink{classbocan_1_1snake_1_1_game}{Game} and the user. prints game elements to the screen and receives keyboard input from the user. 
+
+\+: acts as the interface with the ncurses library. responsible for reading and writing information to the savefile. \begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{todo__todo000029}{Todo}}]\+: class object is currently allocated in \doxylink{classbocan_1_1snake_1_1_game}{Game} on the heap. refactor to allocate on the stack and have direct access to \doxylink{classbocan_1_1snake_1_1_game}{Game} private members. \end{DoxyRefDesc}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classbocan_1_1snake_1_1_printer_a1aba91ebff40aebda570d92f17f28b27}\label{classbocan_1_1snake_1_1_printer_a1aba91ebff40aebda570d92f17f28b27} 
+\index{bocan::snake::Printer@{bocan::snake::Printer}!Printer@{Printer}}
+\index{Printer@{Printer}!bocan::snake::Printer@{bocan::snake::Printer}}
+\doxysubsubsection{\texorpdfstring{Printer()}{Printer()}}
+{\footnotesize\ttfamily Printer\+::\+Printer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\+: constructor method for the \doxylink{classbocan_1_1snake_1_1_printer}{Printer} class. initializations occur in the \doxylink{classbocan_1_1snake_1_1_printer_ac12cf98597aae1e32b651b7da9c7a7a3}{Setup\+Screen()} function. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em } & none. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\+: \doxylink{classbocan_1_1snake_1_1_printer}{Printer} object. 
+\end{DoxyReturn}
+\begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{todo__todo000013}{Todo}}]\+: none. \end{DoxyRefDesc}
+\Hypertarget{classbocan_1_1snake_1_1_printer_a011da1d2aa31df5440071c0b6e80eb1d}\label{classbocan_1_1snake_1_1_printer_a011da1d2aa31df5440071c0b6e80eb1d} 
+\index{bocan::snake::Printer@{bocan::snake::Printer}!````~Printer@{\texorpdfstring{$\sim$}{\string~}Printer}}
+\index{````~Printer@{\texorpdfstring{$\sim$}{\string~}Printer}!bocan::snake::Printer@{bocan::snake::Printer}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Printer()}{\string~Printer()}}
+{\footnotesize\ttfamily Printer\+::\texorpdfstring{$\sim$}{\string~}\+Printer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\+: destructor method for the \doxylink{classbocan_1_1snake_1_1_printer}{Printer} class. memory is deallocated in the \doxylink{classbocan_1_1snake_1_1_printer_a628913c5a1765a013d3a5db4e7dba24a}{Exit()} function. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em } & none. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\+: none. 
+\end{DoxyReturn}
+\begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{todo__todo000014}{Todo}}]\+: none. \end{DoxyRefDesc}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classbocan_1_1snake_1_1_printer_ae0e1ccd27d1f955c139e9f2ee8c00c20}\label{classbocan_1_1snake_1_1_printer_ae0e1ccd27d1f955c139e9f2ee8c00c20} 
+\index{bocan::snake::Printer@{bocan::snake::Printer}!EndGame@{EndGame}}
+\index{EndGame@{EndGame}!bocan::snake::Printer@{bocan::snake::Printer}}
+\doxysubsubsection{\texorpdfstring{EndGame()}{EndGame()}}
+{\footnotesize\ttfamily bool Printer\+::\+End\+Game (\begin{DoxyParamCaption}\item[{int}]{score }\end{DoxyParamCaption})}
+
+
+
+\+: checks for a new high score and records new high score to savefile. prints the end menu. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em } & \\
+\hline
+\end{DoxyParams}
+current game score as an integer; used to compare against the previous high score. \begin{DoxyReturn}{Returns}
+\+: boolean true if user quit the game, boolean false to return to the start menu 
+\end{DoxyReturn}
+\begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{todo__todo000020}{Todo}}]\+: none. \end{DoxyRefDesc}
+\Hypertarget{classbocan_1_1snake_1_1_printer_a5a415acac8ecfddd9b33e8e575a611a1}\label{classbocan_1_1snake_1_1_printer_a5a415acac8ecfddd9b33e8e575a611a1} 
+\index{bocan::snake::Printer@{bocan::snake::Printer}!EndScreen@{EndScreen}}
+\index{EndScreen@{EndScreen}!bocan::snake::Printer@{bocan::snake::Printer}}
+\doxysubsubsection{\texorpdfstring{EndScreen()}{EndScreen()}}
+{\footnotesize\ttfamily void Printer\+::\+End\+Screen (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\+: delete screen windows and deallocate memory. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em } & none. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\+: none. 
+\end{DoxyReturn}
+\begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{todo__todo000016}{Todo}}]\+: none. \end{DoxyRefDesc}
+\Hypertarget{classbocan_1_1snake_1_1_printer_a628913c5a1765a013d3a5db4e7dba24a}\label{classbocan_1_1snake_1_1_printer_a628913c5a1765a013d3a5db4e7dba24a} 
+\index{bocan::snake::Printer@{bocan::snake::Printer}!Exit@{Exit}}
+\index{Exit@{Exit}!bocan::snake::Printer@{bocan::snake::Printer}}
+\doxysubsubsection{\texorpdfstring{Exit()}{Exit()}}
+{\footnotesize\ttfamily void Printer\+::\+Exit (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\+: prints message to alert to user the program is exiting. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em } & none. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\+: none. 
+\end{DoxyReturn}
+\begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{todo__todo000022}{Todo}}]\+: none. \end{DoxyRefDesc}
+\Hypertarget{classbocan_1_1snake_1_1_printer_a61286e700728df51cfd9ad4022763828}\label{classbocan_1_1snake_1_1_printer_a61286e700728df51cfd9ad4022763828} 
+\index{bocan::snake::Printer@{bocan::snake::Printer}!GetDirection@{GetDirection}}
+\index{GetDirection@{GetDirection}!bocan::snake::Printer@{bocan::snake::Printer}}
+\doxysubsubsection{\texorpdfstring{GetDirection()}{GetDirection()}}
+{\footnotesize\ttfamily int Printer\+::\+Get\+Direction (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\+: gets the user input during the main game loop. user can change direction of the snake, pause the game, or exit the game. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em } & none. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\+: integer represented by a user input enumerator. 
+\end{DoxyReturn}
+\begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{todo__todo000023}{Todo}}]\+: none. \end{DoxyRefDesc}
+\Hypertarget{classbocan_1_1snake_1_1_printer_a9c251709156c2ff89d649d9f53864832}\label{classbocan_1_1snake_1_1_printer_a9c251709156c2ff89d649d9f53864832} 
+\index{bocan::snake::Printer@{bocan::snake::Printer}!Pause@{Pause}}
+\index{Pause@{Pause}!bocan::snake::Printer@{bocan::snake::Printer}}
+\doxysubsubsection{\texorpdfstring{Pause()}{Pause()}}
+{\footnotesize\ttfamily void Printer\+::\+Pause (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\+: continuous loop while game is paused, waits for user to unpause the game. 
+
+\+: side effect is to remain in function until user presses unpause command. 
+\begin{DoxyParams}{Parameters}
+{\em } & none. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\+: none. 
+\end{DoxyReturn}
+\begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{todo__todo000021}{Todo}}]\+: none. \end{DoxyRefDesc}
+\Hypertarget{classbocan_1_1snake_1_1_printer_a250cffd120e0e4ecfd742067be2a8115}\label{classbocan_1_1snake_1_1_printer_a250cffd120e0e4ecfd742067be2a8115} 
+\index{bocan::snake::Printer@{bocan::snake::Printer}!PrintGameSpace@{PrintGameSpace}}
+\index{PrintGameSpace@{PrintGameSpace}!bocan::snake::Printer@{bocan::snake::Printer}}
+\doxysubsubsection{\texorpdfstring{PrintGameSpace()}{PrintGameSpace()}}
+{\footnotesize\ttfamily void Printer\+::\+Print\+Game\+Space (\begin{DoxyParamCaption}\item[{std\+::list$<$ std\+::array$<$ int, 2 $>$ $>$}]{snake,  }\item[{std\+::array$<$ int, 2 $>$}]{food }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\+: prints the main gameplay window once per frame to upate snake position. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em } & \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\doxylink{classbocan_1_1snake_1_1_printer_a5688d3095fa7bb74abfbcd950639a200}{Printer\+::\+Refresh\+Game\+Space()} 
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em } & \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\doxylink{classbocan_1_1snake_1_1_printer_a5688d3095fa7bb74abfbcd950639a200}{Printer\+::\+Refresh\+Game\+Space()} 
+\end{DoxySeeAlso}
+\begin{DoxyReturn}{Returns}
+\+: none. 
+\end{DoxyReturn}
+\begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{todo__todo000027}{Todo}}]\+:\end{DoxyRefDesc}
+\begin{DoxySeeAlso}{See also}
+\doxylink{classbocan_1_1snake_1_1_printer_a5688d3095fa7bb74abfbcd950639a200}{Printer\+::\+Refresh\+Game\+Space()} 
+\end{DoxySeeAlso}
+\Hypertarget{classbocan_1_1snake_1_1_printer_a6b80c58e18895a5b1f3c55299e56ac72}\label{classbocan_1_1snake_1_1_printer_a6b80c58e18895a5b1f3c55299e56ac72} 
+\index{bocan::snake::Printer@{bocan::snake::Printer}!PrintHighScore@{PrintHighScore}}
+\index{PrintHighScore@{PrintHighScore}!bocan::snake::Printer@{bocan::snake::Printer}}
+\doxysubsubsection{\texorpdfstring{PrintHighScore()}{PrintHighScore()}}
+{\footnotesize\ttfamily void Printer\+::\+Print\+High\+Score (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\+: prints the current high score loaded in from the savefile. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em } & none. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\+: none. 
+\end{DoxyReturn}
+\begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{todo__todo000025}{Todo}}]\+: none. \end{DoxyRefDesc}
+\Hypertarget{classbocan_1_1snake_1_1_printer_a91b9cb1da21d44872e1ae7b20b6c4484}\label{classbocan_1_1snake_1_1_printer_a91b9cb1da21d44872e1ae7b20b6c4484} 
+\index{bocan::snake::Printer@{bocan::snake::Printer}!PrintScore@{PrintScore}}
+\index{PrintScore@{PrintScore}!bocan::snake::Printer@{bocan::snake::Printer}}
+\doxysubsubsection{\texorpdfstring{PrintScore()}{PrintScore()}}
+{\footnotesize\ttfamily void Printer\+::\+Print\+Score (\begin{DoxyParamCaption}\item[{int}]{score }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\+: prints the score for the current game during the main gameloop. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em } & \\
+\hline
+\end{DoxyParams}
+score for the current game as an integer. \begin{DoxyReturn}{Returns}
+\+: none. 
+\end{DoxyReturn}
+\begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{todo__todo000026}{Todo}}]\+: none. \end{DoxyRefDesc}
+\Hypertarget{classbocan_1_1snake_1_1_printer_ab9130e2306e02b310c8467be627cab32}\label{classbocan_1_1snake_1_1_printer_ab9130e2306e02b310c8467be627cab32} 
+\index{bocan::snake::Printer@{bocan::snake::Printer}!PrintTitle@{PrintTitle}}
+\index{PrintTitle@{PrintTitle}!bocan::snake::Printer@{bocan::snake::Printer}}
+\doxysubsubsection{\texorpdfstring{PrintTitle()}{PrintTitle()}}
+{\footnotesize\ttfamily void Printer\+::\+Print\+Title (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\+: prints the game title window. does not update after initial print. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em } & none. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\+: none. 
+\end{DoxyReturn}
+\begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{todo__todo000024}{Todo}}]\+: none. \end{DoxyRefDesc}
+\Hypertarget{classbocan_1_1snake_1_1_printer_a5688d3095fa7bb74abfbcd950639a200}\label{classbocan_1_1snake_1_1_printer_a5688d3095fa7bb74abfbcd950639a200} 
+\index{bocan::snake::Printer@{bocan::snake::Printer}!RefreshGameSpace@{RefreshGameSpace}}
+\index{RefreshGameSpace@{RefreshGameSpace}!bocan::snake::Printer@{bocan::snake::Printer}}
+\doxysubsubsection{\texorpdfstring{RefreshGameSpace()}{RefreshGameSpace()}}
+{\footnotesize\ttfamily void Printer\+::\+Refresh\+Game\+Space (\begin{DoxyParamCaption}\item[{std\+::list$<$ std\+::array$<$ int, 2 $>$ $>$}]{snake,  }\item[{std\+::array$<$ int, 2 $>$}]{food }\end{DoxyParamCaption})}
+
+
+
+\+: reprint contents of the gamespace window. this function is called every frame to move the snake. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em } & \\
+\hline
+\end{DoxyParams}
+snake as a linked-\/list of integer arrays. integer arrays represent each snake segment position in \{column, row\} from the left and top of the screen. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em } & \\
+\hline
+\end{DoxyParams}
+food as an integer array. integer array represents the food position in \{column, row\} from the left and top of the screen. \begin{DoxyReturn}{Returns}
+\+: none. 
+\end{DoxyReturn}
+\begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{todo__todo000018}{Todo}}]\+: pass snake and food by const reference instead of by value to improve performance. \end{DoxyRefDesc}
+\Hypertarget{classbocan_1_1snake_1_1_printer_a695ce84bafb85394adb69f9f8540aed4}\label{classbocan_1_1snake_1_1_printer_a695ce84bafb85394adb69f9f8540aed4} 
+\index{bocan::snake::Printer@{bocan::snake::Printer}!RefreshScreen@{RefreshScreen}}
+\index{RefreshScreen@{RefreshScreen}!bocan::snake::Printer@{bocan::snake::Printer}}
+\doxysubsubsection{\texorpdfstring{RefreshScreen()}{RefreshScreen()}}
+{\footnotesize\ttfamily void Printer\+::\+Refresh\+Screen (\begin{DoxyParamCaption}\item[{int}]{score }\end{DoxyParamCaption})}
+
+
+
+\+: reprint contents of the title and score windows. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em } & \\
+\hline
+\end{DoxyParams}
+current score as an integer, passed to the private method \doxylink{classbocan_1_1snake_1_1_printer_a91b9cb1da21d44872e1ae7b20b6c4484}{Print\+Score(int)}. \begin{DoxyReturn}{Returns}
+\+: none. 
+\end{DoxyReturn}
+\begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{todo__todo000017}{Todo}}]\+: none. \end{DoxyRefDesc}
+\Hypertarget{classbocan_1_1snake_1_1_printer_ac12cf98597aae1e32b651b7da9c7a7a3}\label{classbocan_1_1snake_1_1_printer_ac12cf98597aae1e32b651b7da9c7a7a3} 
+\index{bocan::snake::Printer@{bocan::snake::Printer}!SetupScreen@{SetupScreen}}
+\index{SetupScreen@{SetupScreen}!bocan::snake::Printer@{bocan::snake::Printer}}
+\doxysubsubsection{\texorpdfstring{SetupScreen()}{SetupScreen()}}
+{\footnotesize\ttfamily void Printer\+::\+Setup\+Screen (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\+: initializes the screen windows and draws window borders. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em } & none. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\+: none. 
+\end{DoxyReturn}
+\begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{todo__todo000015}{Todo}}]\+: define window size constants in \doxylink{printer_8hpp_source}{printer.\+hpp} to replace constants. \end{DoxyRefDesc}
+\Hypertarget{classbocan_1_1snake_1_1_printer_a4dec5029da2ca69959a2a44c7801fb70}\label{classbocan_1_1snake_1_1_printer_a4dec5029da2ca69959a2a44c7801fb70} 
+\index{bocan::snake::Printer@{bocan::snake::Printer}!StartGame@{StartGame}}
+\index{StartGame@{StartGame}!bocan::snake::Printer@{bocan::snake::Printer}}
+\doxysubsubsection{\texorpdfstring{StartGame()}{StartGame()}}
+{\footnotesize\ttfamily bool Printer\+::\+Start\+Game (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\+: load the previous high score from the savefile. print the game start menu and receive user input. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em } & none. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\+: boolean true to start the game or boolean false if user quit the game. 
+\end{DoxyReturn}
+\begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{todo__todo000019}{Todo}}]\+: add input option to allow user to reset high score history. \end{DoxyRefDesc}
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}

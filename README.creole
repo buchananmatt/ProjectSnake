@@ -1,0 +1,90 @@
+=Project Snake
+==Overview
+
+This program is my implementation of the classic game, Snake, within the Terminal.
+The program uses the ncurses library to draw windows and provide a Terminal (text) User Interface (TUI).
+
+==Build
+Machine Description:
+* C++ Version: GNU++14
+* macOS 11.7.10
+* Dual-Core Intel Core i5 @ 2.8 GHz
+
+Software Used:
+* NeoVim                    https://neovim.io/
+* Apple Clang 13.0.0        https://clang.llvm.org/
+* GNU Make 3.81             https://www.gnu.org/software/make/
+* Git 2.32.0                https://git-scm.com/
+* Doxygen 1.9.8             https://www.doxygen.nl/index.html
+
+For this project, I made the switch from Microsoft VS Code as my primary editor to NeoVim. There are a few reasons for this; the most significant are VS Code was fairly resource intensive and would often drain my laptop battery very quickly when working off remote power, and Microsoft announced VS Code would stop being supported for macOS in the near future. I have wanted to shift more of my development work to the Terminal anyway so this was a good opportunity to do so. I followed the guide and repositroy below to setup NeoVim to look and behave in a similar fashion to VS Code, and for the moment, I am happy with this setup.
+
+https://github.com/josethz00/neovim-like-vscode
+
+Ncurses is implemented as a dynamic library in this program. Building and running this game requires the ncurses library be installed on your local computer. 
+To learn more and to download, see https://invisible-island.net/ncurses/ncurses.html. 
+
+From a terminal, navigate to the root project directory and run:
+
+{{{
+make
+}}}
+
+The program can be ran from the file explorer by running the file "snake.out", or from a terminal by running the command from the project directory:
+{{{
+make run
+}}}
+
+or
+
+{{{
+./bin/snake.out
+}}}
+
+==Known Issues
+
+===Leaking Snake
+
+The program is generally stable and the game is very playable. However, there is a significant bug where when moving the snake, a snake segment will "leak" and remain disconnected from the snake on the screen. The snake remains the correct lenth, but there is an additional segment which remains on the screen. The segment will clear if the user directs the snake to pass over the segment. It appears to occur primarily when the snake is moving up or down and on the row immediately above or below the food. I am still troubleshooting this issue and am very interested in what might cause this.
+
+==Planned Updates
+
+*Leaking Snake Issue (described above)
+*Refactor to use Enum Class instead of Enum in printer.hpp
+*Refactor Game and Printer objects to allocate on the heap and have direct access to each other's private members
+*Add gameplay feature where snake speed increases as score increases.
+
+==Project Goals
+
+For this project, I wanted to build off of what I learned in making the Tic Tac Toe game and started building a standard for what I want Bocan Software Terminal games to look like. I want to keep the look and behavior of my games similar, while still experimenting with different code design behind-the-scenes. This game is my first look at a "frame rate" game, where the game is anchored on updating the screen every frame.
+
+This game also includes a simple file stream to write and record previous high scores. Each game, if a player's score is greater than the previous recorded high score, their score is then written to the file.
+
+==Program Design
+
+===Doxygen
+
+For this project, I started using Doxygen to document the code and program design. The doxygen documentation can be viewed at:
+
+https://htmlpreview.github.io/?https://github.com/buchananmatt/ProjectSnake/blob/master/doc/html/index.html
+
+==Project Timeline
+
+* Project Start | 2 September 2023
+* Project Stable | 23 September 2023
+
+==License
+
+COPYRIGHT [2023] [MATTHEW T. BUCHANAN] [BOCAN SOFTWARE]
+
+Licensed under the Apache License, Version 2.0 (the "License);
+You may not use these files except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apacher.org/licenses.LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the license is distributed on an "as is" basis, 
+without warranties or conditions of any kind, either express or implied.
+See the License for th specific language governing permissions and
+limitations under the license.

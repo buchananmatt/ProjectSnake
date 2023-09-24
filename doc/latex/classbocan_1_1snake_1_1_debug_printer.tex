@@ -1,0 +1,48 @@
+\doxysection{bocan\+::snake\+::Debug\+Printer Class Reference}
+\hypertarget{classbocan_1_1snake_1_1_debug_printer}{}\label{classbocan_1_1snake_1_1_debug_printer}\index{bocan::snake::DebugPrinter@{bocan::snake::DebugPrinter}}
+
+
+Draws a debugging console window to the screen separate from the \doxylink{classbocan_1_1snake_1_1_printer}{Printer} screen windows.  
+
+
+
+
+{\ttfamily \#include $<$debug\+\_\+printer.\+hpp$>$}
+
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structbocan_1_1snake_1_1_debug_printer_1_1window__size}{window\+\_\+size}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classbocan_1_1snake_1_1_debug_printer_a74d2ee876e33b3db226617987fa4bb76}\label{classbocan_1_1snake_1_1_debug_printer_a74d2ee876e33b3db226617987fa4bb76} 
+void {\bfseries Print} (int)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classbocan_1_1snake_1_1_debug_printer_a101013ed53b4904530672baacd0f2b06}\label{classbocan_1_1snake_1_1_debug_printer_a101013ed53b4904530672baacd0f2b06} 
+WINDOW \texorpdfstring{$\ast$}{*} {\bfseries win\+\_\+debug}
+\item 
+\Hypertarget{classbocan_1_1snake_1_1_debug_printer_a78144712b660e57d7ffe64ce53bf8f3f}\label{classbocan_1_1snake_1_1_debug_printer_a78144712b660e57d7ffe64ce53bf8f3f} 
+std\+::deque$<$ int $>$ {\bfseries m\+\_\+debug\+\_\+queue}
+\item 
+\Hypertarget{classbocan_1_1snake_1_1_debug_printer_ad3163fde3589c2fc81af8e527fbc93a6}\label{classbocan_1_1snake_1_1_debug_printer_ad3163fde3589c2fc81af8e527fbc93a6} 
+int {\bfseries m\+\_\+max\+\_\+queue\+\_\+size} = 35
+\item 
+\Hypertarget{classbocan_1_1snake_1_1_debug_printer_a6aff5d7ac61ea9b49753b3b02bc016ea}\label{classbocan_1_1snake_1_1_debug_printer_a6aff5d7ac61ea9b49753b3b02bc016ea} 
+struct \mbox{\hyperlink{structbocan_1_1snake_1_1_debug_printer_1_1window__size}{bocan\+::snake\+::\+Debug\+Printer\+::window\+\_\+size}} {\bfseries m\+\_\+debug}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Draws a debugging console window to the screen separate from the \doxylink{classbocan_1_1snake_1_1_printer}{Printer} screen windows. 
+
+Used to debug the game during early development. Not included in the release version of the game. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/debug/debug\+\_\+printer.\+hpp\item 
+src/debug/debug\+\_\+printer.\+cpp\end{DoxyCompactItemize}

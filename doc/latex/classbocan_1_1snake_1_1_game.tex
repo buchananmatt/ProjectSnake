@@ -1,21 +1,74 @@
 \doxysection{bocan\+::snake\+::Game Class Reference}
 \hypertarget{classbocan_1_1snake_1_1_game}{}\label{classbocan_1_1snake_1_1_game}\index{bocan::snake::Game@{bocan::snake::Game}}
+
+
+\+: contains the implementation of gameplay features and mechanics.  
+
+
+
+
+{\ttfamily \#include $<$game.\+hpp$>$}
+
 \doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{classbocan_1_1snake_1_1_game_ad59df6562a58a614fda24622d3715b65}{Game}} ()
-\begin{DoxyCompactList}\small\item\em Constructor for the \doxylink{classbocan_1_1snake_1_1_game}{Game} class object. \end{DoxyCompactList}\item 
-\Hypertarget{classbocan_1_1snake_1_1_game_ae3d112ca6e0e55150d2fdbc704474530}\label{classbocan_1_1snake_1_1_game_ae3d112ca6e0e55150d2fdbc704474530} 
-{\bfseries \texorpdfstring{$\sim$}{\string~}\+Game} ()
-\begin{DoxyCompactList}\small\item\em Destructor for the \doxylink{classbocan_1_1snake_1_1_game}{Game} class object. \end{DoxyCompactList}\item 
-\Hypertarget{classbocan_1_1snake_1_1_game_adb05b20574551a26f8cf1dc664782790}\label{classbocan_1_1snake_1_1_game_adb05b20574551a26f8cf1dc664782790} 
-void {\bfseries Start} ()
+\begin{DoxyCompactList}\small\item\em \+: constructor for the \doxylink{classbocan_1_1snake_1_1_game}{Game} class object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classbocan_1_1snake_1_1_game_ae3d112ca6e0e55150d2fdbc704474530}{\texorpdfstring{$\sim$}{\string~}\+Game}} ()
+\begin{DoxyCompactList}\small\item\em \+: destructor for the \doxylink{classbocan_1_1snake_1_1_game}{Game} class object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classbocan_1_1snake_1_1_game_adb05b20574551a26f8cf1dc664782790}{Start}} ()
+\begin{DoxyCompactList}\small\item\em \+: sets the current score to zero and calls the printer-\/\texorpdfstring{$>$}{>}Start\+Game() function to print the start menu and receive user input. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classbocan_1_1snake_1_1_game_aaa0ff18388b32b4e6198835a35e000d3}{Game\+Loop}} ()
+\begin{DoxyCompactList}\small\item\em \+: main game loop. refreshes at a set constant frame rate to move the snake, generate food and snake positions, and refresh the screen. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classbocan_1_1snake_1_1_game_aacd8458913a341b6710b0bc80490b993}{End\+Game}} ()
+\begin{DoxyCompactList}\small\item\em \+: check if user quit the game. calls printer-\/\texorpdfstring{$>$}{>}\doxylink{classbocan_1_1snake_1_1_game_aacd8458913a341b6710b0bc80490b993}{End\+Game()} to print the end game menu and receive user input. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
 \item 
-\Hypertarget{classbocan_1_1snake_1_1_game_aaa0ff18388b32b4e6198835a35e000d3}\label{classbocan_1_1snake_1_1_game_aaa0ff18388b32b4e6198835a35e000d3} 
-void {\bfseries Game\+Loop} ()
+void \mbox{\hyperlink{classbocan_1_1snake_1_1_game_a85be9f66526c73f4e5247c91e6d40e24}{Generate\+Snake}} ()
+\begin{DoxyCompactList}\small\item\em \+: generates the snake for the beginning of the game in the middle of the game space window. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classbocan_1_1snake_1_1_game_af1966267ff79251a9ed5c73773267f8d}{Generate\+Food}} ()
+\begin{DoxyCompactList}\small\item\em \+: generates the food at a random location within the game space \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classbocan_1_1snake_1_1_game_a8cbe86d602a40868de18b46a521ff92c}{Move\+Snake}} ()
+\begin{DoxyCompactList}\small\item\em \+: moves the snake in the current snake direction by popping segment of the end and pushing back at the beginning. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classbocan_1_1snake_1_1_game_af37109aab7a6ec5c3f8af985e57e071d}{Food\+Collision}} ()
+\begin{DoxyCompactList}\small\item\em \+: checks if the front of the snake has collided with the food \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classbocan_1_1snake_1_1_game_a29076c9ac787cccbdba8f498a2650bdd}{Increase\+Snake\+Size}} ()
+\begin{DoxyCompactList}\small\item\em \+: increases the size of the snake by one segment. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classbocan_1_1snake_1_1_game_a1d7263aefdb587ac30016489746b6041}{Collision\+Detect}} ()
+\begin{DoxyCompactList}\small\item\em \+: checks for a collision between the snake and the game space boundary or between different snake segments. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
 \item 
-\Hypertarget{classbocan_1_1snake_1_1_game_aacd8458913a341b6710b0bc80490b993}\label{classbocan_1_1snake_1_1_game_aacd8458913a341b6710b0bc80490b993} 
-bool {\bfseries End\+Game} ()
+\Hypertarget{classbocan_1_1snake_1_1_game_aae801239e59c7e24d11e1068c706ae7c}\label{classbocan_1_1snake_1_1_game_aae801239e59c7e24d11e1068c706ae7c} 
+\mbox{\hyperlink{classbocan_1_1snake_1_1_printer}{Printer}} \texorpdfstring{$\ast$}{*} {\bfseries printer}
+\item 
+\Hypertarget{classbocan_1_1snake_1_1_game_abba97a368563eb0b7cfa8274b3337dbd}\label{classbocan_1_1snake_1_1_game_abba97a368563eb0b7cfa8274b3337dbd} 
+std\+::list$<$ std\+::array$<$ int, 2 $>$ $>$ {\bfseries m\+\_\+snake}
+\item 
+\Hypertarget{classbocan_1_1snake_1_1_game_ad3ce221ace927132e567151c4270d914}\label{classbocan_1_1snake_1_1_game_ad3ce221ace927132e567151c4270d914} 
+std\+::array$<$ int, 2 $>$ {\bfseries m\+\_\+food}
+\item 
+\Hypertarget{classbocan_1_1snake_1_1_game_a29f70542d3f11f40c984855fcf418aea}\label{classbocan_1_1snake_1_1_game_a29f70542d3f11f40c984855fcf418aea} 
+const int {\bfseries k\+\_\+frame\+\_\+rate} = 150
+\item 
+\Hypertarget{classbocan_1_1snake_1_1_game_ab150e4de6dd150c55fffe1a2fc5c4f4c}\label{classbocan_1_1snake_1_1_game_ab150e4de6dd150c55fffe1a2fc5c4f4c} 
+const int {\bfseries k\+\_\+game\+\_\+space\+\_\+w} = 115
+\item 
+\Hypertarget{classbocan_1_1snake_1_1_game_a371418a4f2932d1df81fac09d9cb2705}\label{classbocan_1_1snake_1_1_game_a371418a4f2932d1df81fac09d9cb2705} 
+const int {\bfseries k\+\_\+game\+\_\+space\+\_\+h} = 35
+\item 
+\Hypertarget{classbocan_1_1snake_1_1_game_af753bb0f76fc70d2534751faea4062a1}\label{classbocan_1_1snake_1_1_game_af753bb0f76fc70d2534751faea4062a1} 
+int {\bfseries m\+\_\+score}
+\item 
+\Hypertarget{classbocan_1_1snake_1_1_game_a0833d318c7a7df8117d3a6e807928cc9}\label{classbocan_1_1snake_1_1_game_a0833d318c7a7df8117d3a6e807928cc9} 
+int {\bfseries m\+\_\+high\+\_\+score}
+\item 
+\Hypertarget{classbocan_1_1snake_1_1_game_afc7743ca83a3e60e1ded5f459bc4439a}\label{classbocan_1_1snake_1_1_game_afc7743ca83a3e60e1ded5f459bc4439a} 
+int {\bfseries m\+\_\+snake\+\_\+direction}
+\item 
+\Hypertarget{classbocan_1_1snake_1_1_game_a2e39b0061058cce65f154924de2d55ed}\label{classbocan_1_1snake_1_1_game_a2e39b0061058cce65f154924de2d55ed} 
+bool {\bfseries m\+\_\+quit\+\_\+flag}
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Friends}
 \begin{DoxyCompactItemize}
@@ -23,6 +76,15 @@ bool {\bfseries End\+Game} ()
 \Hypertarget{classbocan_1_1snake_1_1_game_acdb73910fe7e6db5af3e0545f4028881}\label{classbocan_1_1snake_1_1_game_acdb73910fe7e6db5af3e0545f4028881} 
 class {\bfseries Printer}
 \end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\+: contains the implementation of gameplay features and mechanics. 
+
+\+: public Methods are the game functions called by the main function.
+
+\+: \doxylink{classbocan_1_1snake_1_1_game}{Game} owns the \doxylink{classbocan_1_1snake_1_1_printer}{Printer} object and makes all method calls to this object. \begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{todo__todo000012}{Todo}}]\+: allocate \doxylink{classbocan_1_1snake_1_1_printer}{Printer} object on the stack and provide direct access to \doxylink{classbocan_1_1snake_1_1_game}{Game} private members. \end{DoxyRefDesc}
 
 
 \doxysubsection{Constructor \& Destructor Documentation}
@@ -34,11 +96,221 @@ class {\bfseries Printer}
 
 
 
-Constructor for the \doxylink{classbocan_1_1snake_1_1_game}{Game} class object. 
+\+: constructor for the \doxylink{classbocan_1_1snake_1_1_game}{Game} class object. 
 
+
+\begin{DoxyParams}{Parameters}
+{\em } & none. \\
+\hline
+\end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-\doxylink{classbocan_1_1snake_1_1_game}{Game} object instance. Only one instance is initialized in the main function. 
+\+: \doxylink{classbocan_1_1snake_1_1_game}{Game} object instance. only one instance is initialized in the main function. 
 \end{DoxyReturn}
+\begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{todo__todo000001}{Todo}}]\+: none. \end{DoxyRefDesc}
+\Hypertarget{classbocan_1_1snake_1_1_game_ae3d112ca6e0e55150d2fdbc704474530}\label{classbocan_1_1snake_1_1_game_ae3d112ca6e0e55150d2fdbc704474530} 
+\index{bocan::snake::Game@{bocan::snake::Game}!````~Game@{\texorpdfstring{$\sim$}{\string~}Game}}
+\index{````~Game@{\texorpdfstring{$\sim$}{\string~}Game}!bocan::snake::Game@{bocan::snake::Game}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Game()}{\string~Game()}}
+{\footnotesize\ttfamily Game\+::\texorpdfstring{$\sim$}{\string~}\+Game (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\+: destructor for the \doxylink{classbocan_1_1snake_1_1_game}{Game} class object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em } & none. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\+: none. 
+\end{DoxyReturn}
+\begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{todo__todo000002}{Todo}}]\+: none. \end{DoxyRefDesc}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classbocan_1_1snake_1_1_game_a1d7263aefdb587ac30016489746b6041}\label{classbocan_1_1snake_1_1_game_a1d7263aefdb587ac30016489746b6041} 
+\index{bocan::snake::Game@{bocan::snake::Game}!CollisionDetect@{CollisionDetect}}
+\index{CollisionDetect@{CollisionDetect}!bocan::snake::Game@{bocan::snake::Game}}
+\doxysubsubsection{\texorpdfstring{CollisionDetect()}{CollisionDetect()}}
+{\footnotesize\ttfamily bool Game\+::\+Collision\+Detect (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\+: checks for a collision between the snake and the game space boundary or between different snake segments. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em } & none. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\+: boolean true if a collision is detected, false if no collision is detected. 
+\end{DoxyReturn}
+\begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{todo__todo000011}{Todo}}]\+: none. \end{DoxyRefDesc}
+\Hypertarget{classbocan_1_1snake_1_1_game_aacd8458913a341b6710b0bc80490b993}\label{classbocan_1_1snake_1_1_game_aacd8458913a341b6710b0bc80490b993} 
+\index{bocan::snake::Game@{bocan::snake::Game}!EndGame@{EndGame}}
+\index{EndGame@{EndGame}!bocan::snake::Game@{bocan::snake::Game}}
+\doxysubsubsection{\texorpdfstring{EndGame()}{EndGame()}}
+{\footnotesize\ttfamily bool Game\+::\+End\+Game (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\+: check if user quit the game. calls printer-\/\texorpdfstring{$>$}{>}\doxylink{classbocan_1_1snake_1_1_game_aacd8458913a341b6710b0bc80490b993}{End\+Game()} to print the end game menu and receive user input. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em } & none. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\+: boolean true if user quit the game, boolean false to return to the start menu. 
+\end{DoxyReturn}
+\begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{todo__todo000005}{Todo}}]\+: none. \end{DoxyRefDesc}
+\Hypertarget{classbocan_1_1snake_1_1_game_af37109aab7a6ec5c3f8af985e57e071d}\label{classbocan_1_1snake_1_1_game_af37109aab7a6ec5c3f8af985e57e071d} 
+\index{bocan::snake::Game@{bocan::snake::Game}!FoodCollision@{FoodCollision}}
+\index{FoodCollision@{FoodCollision}!bocan::snake::Game@{bocan::snake::Game}}
+\doxysubsubsection{\texorpdfstring{FoodCollision()}{FoodCollision()}}
+{\footnotesize\ttfamily bool Game\+::\+Food\+Collision (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\+: checks if the front of the snake has collided with the food 
+
+
+\begin{DoxyParams}{Parameters}
+{\em } & none. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\+: boolean true if the front of the snake and the food share the same position, false if they do not 
+\end{DoxyReturn}
+\begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{todo__todo000009}{Todo}}]\+: none. \end{DoxyRefDesc}
+\Hypertarget{classbocan_1_1snake_1_1_game_aaa0ff18388b32b4e6198835a35e000d3}\label{classbocan_1_1snake_1_1_game_aaa0ff18388b32b4e6198835a35e000d3} 
+\index{bocan::snake::Game@{bocan::snake::Game}!GameLoop@{GameLoop}}
+\index{GameLoop@{GameLoop}!bocan::snake::Game@{bocan::snake::Game}}
+\doxysubsubsection{\texorpdfstring{GameLoop()}{GameLoop()}}
+{\footnotesize\ttfamily void Game\+::\+Game\+Loop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\+: main game loop. refreshes at a set constant frame rate to move the snake, generate food and snake positions, and refresh the screen. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em } & none. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\+: none. 
+\end{DoxyReturn}
+\begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{todo__todo000004}{Todo}}]\+: none. \end{DoxyRefDesc}
+\Hypertarget{classbocan_1_1snake_1_1_game_af1966267ff79251a9ed5c73773267f8d}\label{classbocan_1_1snake_1_1_game_af1966267ff79251a9ed5c73773267f8d} 
+\index{bocan::snake::Game@{bocan::snake::Game}!GenerateFood@{GenerateFood}}
+\index{GenerateFood@{GenerateFood}!bocan::snake::Game@{bocan::snake::Game}}
+\doxysubsubsection{\texorpdfstring{GenerateFood()}{GenerateFood()}}
+{\footnotesize\ttfamily void Game\+::\+Generate\+Food (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\+: generates the food at a random location within the game space 
+
+
+\begin{DoxyParams}{Parameters}
+{\em } & none. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\+: none. 
+\end{DoxyReturn}
+\begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{todo__todo000007}{Todo}}]\+: none. \end{DoxyRefDesc}
+\Hypertarget{classbocan_1_1snake_1_1_game_a85be9f66526c73f4e5247c91e6d40e24}\label{classbocan_1_1snake_1_1_game_a85be9f66526c73f4e5247c91e6d40e24} 
+\index{bocan::snake::Game@{bocan::snake::Game}!GenerateSnake@{GenerateSnake}}
+\index{GenerateSnake@{GenerateSnake}!bocan::snake::Game@{bocan::snake::Game}}
+\doxysubsubsection{\texorpdfstring{GenerateSnake()}{GenerateSnake()}}
+{\footnotesize\ttfamily void Game\+::\+Generate\+Snake (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\+: generates the snake for the beginning of the game in the middle of the game space window. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em } & none. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\+: none. 
+\end{DoxyReturn}
+\begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{todo__todo000006}{Todo}}]\+: link game space constants in \doxylink{classbocan_1_1snake_1_1_game}{Game} to the window constants in \doxylink{classbocan_1_1snake_1_1_printer}{Printer}. \end{DoxyRefDesc}
+\Hypertarget{classbocan_1_1snake_1_1_game_a29076c9ac787cccbdba8f498a2650bdd}\label{classbocan_1_1snake_1_1_game_a29076c9ac787cccbdba8f498a2650bdd} 
+\index{bocan::snake::Game@{bocan::snake::Game}!IncreaseSnakeSize@{IncreaseSnakeSize}}
+\index{IncreaseSnakeSize@{IncreaseSnakeSize}!bocan::snake::Game@{bocan::snake::Game}}
+\doxysubsubsection{\texorpdfstring{IncreaseSnakeSize()}{IncreaseSnakeSize()}}
+{\footnotesize\ttfamily void Game\+::\+Increase\+Snake\+Size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\+: increases the size of the snake by one segment. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em } & none. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\+: none. 
+\end{DoxyReturn}
+\begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{todo__todo000010}{Todo}}]\+: none. \end{DoxyRefDesc}
+\Hypertarget{classbocan_1_1snake_1_1_game_a8cbe86d602a40868de18b46a521ff92c}\label{classbocan_1_1snake_1_1_game_a8cbe86d602a40868de18b46a521ff92c} 
+\index{bocan::snake::Game@{bocan::snake::Game}!MoveSnake@{MoveSnake}}
+\index{MoveSnake@{MoveSnake}!bocan::snake::Game@{bocan::snake::Game}}
+\doxysubsubsection{\texorpdfstring{MoveSnake()}{MoveSnake()}}
+{\footnotesize\ttfamily void Game\+::\+Move\+Snake (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\+: moves the snake in the current snake direction by popping segment of the end and pushing back at the beginning. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em } & none. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\+: none. 
+\end{DoxyReturn}
+\begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{todo__todo000008}{Todo}}]\+: fix bug which causes segments to "{}leak"{} on the game space during portions of game play. \end{DoxyRefDesc}
+\Hypertarget{classbocan_1_1snake_1_1_game_adb05b20574551a26f8cf1dc664782790}\label{classbocan_1_1snake_1_1_game_adb05b20574551a26f8cf1dc664782790} 
+\index{bocan::snake::Game@{bocan::snake::Game}!Start@{Start}}
+\index{Start@{Start}!bocan::snake::Game@{bocan::snake::Game}}
+\doxysubsubsection{\texorpdfstring{Start()}{Start()}}
+{\footnotesize\ttfamily void Game\+::\+Start (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\+: sets the current score to zero and calls the printer-\/\texorpdfstring{$>$}{>}Start\+Game() function to print the start menu and receive user input. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em } & none. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\+: none. 
+\end{DoxyReturn}
+\begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{todo__todo000003}{Todo}}]\+: none. \end{DoxyRefDesc}
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
