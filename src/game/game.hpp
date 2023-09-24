@@ -63,7 +63,7 @@ private:
     std::array<int, 2> m_food;
 
     const int k_frame_rate = 150;
-    const int k_game_space_w = 115;
+    const int k_game_space_w = 106;
     const int k_game_space_h = 35;
 
     int m_score;

@@ -73,10 +73,10 @@ void Printer::SetupScreen() {
 
     // total screen size ... columns x ... rows
     // screen begins on column ... and row ...
-    win_title = newwin(5, 50, 1, 35);
-    win_high_score = newwin(5, 25, 1, 2);
-    win_score = newwin(5, 25, 1, 92);
-    win_game_space = newwin(35, 115, 6, 2);
+    win_title = newwin(5, 50, 1, 30);
+    win_high_score = newwin(5, 24, 1, 2);
+    win_score = newwin(5, 24, 1, 84);
+    win_game_space = newwin(35, 106, 6, 2);
 
     // draw borders around each window
     wborder(win_title, 0, 0, 0, 0, 0, 0, 0, 0);
@@ -175,10 +175,10 @@ bool Printer::StartGame() {
     static_cast<void> ( waddstr(win_game_space, ">PROJECT SNAKE [2023] [MATTHEW BUCHANAN] [BOCAN SOFTWARE]") );
     wrefresh(win_game_space);
     PrintHighScore();
+    wmove(win_game_space, 2, 1);
 
     std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 
-    wmove(win_game_space, 2, 1);
     if (!m_high_score.empty()) {
         static_cast<void> ( waddstr(win_game_space, ">CURRENT HIGH SCORE IS [") );
         static_cast<void> ( waddstr(win_game_space, m_high_score.c_str()) );
@@ -241,7 +241,7 @@ bool Printer::EndGame(int score) {
     static_cast<void> ( waddstr(win_game_space, str_score.c_str()) );
     static_cast<void> ( waddstr(win_game_space, ".") );
     wrefresh(win_game_space);
-
+    
     std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 
     wmove(win_game_space, 3, 1);
@@ -432,10 +432,10 @@ void Printer::PrintHighScore() {
     wborder(win_high_score, 0, 0, 0, 0, 0, 0, 0, 0);
 
     // print the score
-    wmove(win_high_score, 2, 5);
+    wmove(win_high_score, 2, 4);
     static_cast<void> ( waddstr(win_high_score, "HIGH SCORE: ") );
 
-    wmove(win_high_score, 2, 18);
+    wmove(win_high_score, 2, 17);
     static_cast<void> ( waddstr(win_high_score, m_high_score.c_str()) );
 
     wrefresh(win_high_score);
