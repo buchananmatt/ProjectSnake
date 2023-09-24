@@ -36,11 +36,11 @@ namespace snake {
 class Printer;
 
 ///
-/// @class: Game
-/// @brief: contains the implementation of gameplay features and mechanics.
-/// @brief: public Methods are the game functions called by the main function.
-/// @brief: Game owns the Printer object and makes all method calls to this object.
-/// @todo: allocate Printer object on the stack and provide direct access to Game private members.
+/// @class Game
+/// @brief contains the implementation of gameplay features and mechanics.
+/// @brief public Methods are the game functions called by the main function.
+/// @brief Game owns the Printer object and makes all method calls to this object.
+/// @todo allocate Printer object on the stack and provide direct access to Game private members.
 ///
 class Game {
 

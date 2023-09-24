@@ -36,10 +36,10 @@ using bocan::snake::Game;
 using bocan::snake::Printer;
 
 ///
-/// @brief: constructor for the Game class object.
-/// @param: none.
-/// @return: Game object instance. only one instance is initialized in the main function.
-/// @todo: none.
+/// @brief constructor for the Game class object.
+/// @param
+/// @return Game object instance. only one instance is initialized in the main function.
+/// @todo
 ///
 Game::Game() {
 
@@ -52,10 +52,10 @@ Game::Game() {
 }
 
 ///
-/// @brief: destructor for the Game class object.
-/// @param: none.
-/// @return: none.
-/// @todo: none.
+/// @brief destructor for the Game class object.
+/// @param
+/// @return
+/// @todo
 ///
 Game::~Game() {
 
@@ -65,10 +65,10 @@ Game::~Game() {
 }
 
 ///
-/// @brief: sets the current score to zero and calls the printer->StartGame() function to print the start menu and receive user input.
-/// @param: none.
-/// @return: none.
-/// @todo: none.
+/// @brief sets the current score to zero and calls the printer->StartGame() function to print the start menu and receive user input.
+/// @param
+/// @return
+/// @todo
 ///
 void Game::Start() {
 
@@ -82,10 +82,10 @@ void Game::Start() {
 }
 
 ///
-/// @brief: main game loop. refreshes at a set constant frame rate to move the snake, generate food and snake positions, and refresh the screen.
-/// @param: none.
-/// @return: none.
-/// @todo: none.
+/// @brief main game loop. refreshes at a set constant frame rate to move the snake, generate food and snake positions, and refresh the screen.
+/// @param
+/// @return
+/// @todo
 ///
 void Game::GameLoop() {
 
@@ -152,10 +152,10 @@ void Game::GameLoop() {
 }
 
 ///
-/// @brief: check if user quit the game. calls printer->EndGame() to print the end game menu and receive user input.
-/// @param: none.
-/// @return: boolean true if user quit the game, boolean false to return to the start menu.
-/// @todo: none.
+/// @brief check if user quit the game. calls printer->EndGame() to print the end game menu and receive user input.
+/// @param
+/// @return boolean true if user quit the game, boolean false to return to the start menu.
+/// @todo
 ///
 bool Game::EndGame() {
 
@@ -174,10 +174,10 @@ bool Game::EndGame() {
 }
 
 ///
-/// @brief: generates the snake for the beginning of the game in the middle of the game space window.
-/// @param: none.
-/// @return: none.
-/// @todo: link game space constants in Game to the window constants in Printer.
+/// @brief generates the snake for the beginning of the game in the middle of the game space window.
+/// @param
+/// @return
+/// @todo link game space constants in Game to the window constants in Printer.
 ///
 void Game::GenerateSnake() {
     
@@ -192,10 +192,10 @@ void Game::GenerateSnake() {
 }
 
 ///
-/// @brief: generates the food at a random location within the game space
-/// @param: none.
-/// @return: none.
-/// @todo: none.
+/// @brief generates the food at a random location within the game space
+/// @param
+/// @return
+/// @todo
 ///
 void Game::GenerateFood() {
 
@@ -208,10 +208,10 @@ void Game::GenerateFood() {
 }
 
 ///
-/// @brief: moves the snake in the current snake direction by popping segment of the end and pushing back at the beginning.
-/// @param: none.
-/// @return: none.
-/// @todo: fix bug which causes segments to "leak" on the game space during portions of game play.
+/// @brief moves the snake in the current snake direction by popping segment of the end and pushing back at the beginning.
+/// @param
+/// @return
+/// @todo fix bug which causes segments to "leak" on the game space during portions of game play.
 ///
 void Game::MoveSnake() {
 
@@ -243,10 +243,10 @@ void Game::MoveSnake() {
 }
 
 ///
-/// @brief: checks if the front of the snake has collided with the food
-/// @param: none.
-/// @return: boolean true if the front of the snake and the food share the same position, false if they do not
-/// @todo: none.
+/// @brief checks if the front of the snake has collided with the food
+/// @param
+/// @return boolean true if the front of the snake and the food share the same position, false if they do not
+/// @todo
 ///
 bool Game::FoodCollision() {
 
@@ -257,10 +257,10 @@ bool Game::FoodCollision() {
 }
 
 ///
-/// @brief: increases the size of the snake by one segment.
-/// @param: none.
-/// @return: none.
-/// @todo: none.
+/// @brief increases the size of the snake by one segment.
+/// @param
+/// @return
+/// @todo
 ///
 void Game::IncreaseSnakeSize() {
 
@@ -327,10 +327,10 @@ void Game::IncreaseSnakeSize() {
 }
 
 ///
-/// @brief: checks for a collision between the snake and the game space boundary or between different snake segments.
-/// @param: none.
-/// @return: boolean true if a collision is detected, false if no collision is detected.
-/// @todo: none.
+/// @brief checks for a collision between the snake and the game space boundary or between different snake segments.
+/// @param
+/// @return boolean true if a collision is detected, false if no collision is detected.
+/// @todo
 ///
 bool Game::CollisionDetect() {
 

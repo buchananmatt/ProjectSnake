@@ -37,10 +37,10 @@ using bocan::snake::Game;
 using bocan::snake::Printer;
 
 ///
-/// @brief: constructor method for the Printer class. initializations occur in the SetupScreen() function. 
-/// @param: none.
-/// @return: Printer object.
-/// @todo: none.
+/// @brief constructor method for the Printer class. initializations occur in the SetupScreen() function. 
+/// @param
+/// @return Printer object.
+/// @todo
 ///
 Printer::Printer() {
 
@@ -48,19 +48,19 @@ Printer::Printer() {
 
 ///
 /// @brief: destructor method for the Printer class. memory is deallocated in the Exit() function.
-/// @param: none.
-/// @return: none.
-/// @todo: none.
+/// @param
+/// @return
+/// @todo
 ///
 Printer::~Printer() {
 
 }
 
 ///
-/// @brief: initializes the screen windows and draws window borders.
-/// @param: none. 
-/// @return: none.
-/// @todo: define window size constants in printer.hpp to replace constants.
+/// @brief initializes the screen windows and draws window borders.
+/// @param
+/// @return
+/// @todo define window size constants in printer.hpp to replace constants.
 ///
 void Printer::SetupScreen() {
 
@@ -94,10 +94,10 @@ void Printer::SetupScreen() {
 }
 
 ///
-/// @brief: delete screen windows and deallocate memory.
-/// @param: none.
-/// @return: none.
-/// @todo: none.
+/// @brief delete screen windows and deallocate memory.
+/// @param
+/// @return
+/// @todo
 ///
 void Printer::EndScreen() {
 
@@ -110,10 +110,10 @@ void Printer::EndScreen() {
 }
 
 ///
-/// @brief: reprint contents of the title and score windows.
-/// @param[in]: current score as an integer, passed to the private method PrintScore(int).
-/// @return: none.
-/// @todo: none.
+/// @brief reprint contents of the title and score windows.
+/// @param[in] score as an integer, passed to the private method PrintScore(int).
+/// @return
+/// @todo
 ///
 void Printer::RefreshScreen(int score) {
 
@@ -124,11 +124,11 @@ void Printer::RefreshScreen(int score) {
 }
 
 ///
-/// @brief: reprint contents of the gamespace window. this function is called every frame to move the snake.
-/// @param[in]: snake as a linked-list of integer arrays. integer arrays represent each snake segment position in {column, row} from the left and top of the screen.
-/// @param[in]: food as an integer array. integer array represents the food position in {column, row} from the left and top of the screen.
-/// @return: none. 
-/// @todo: pass snake and food by const reference instead of by value to improve performance.
+/// @brief reprint contents of the gamespace window. this function is called every frame to move the snake.
+/// @param[in] snake as a linked-list of integer arrays. integer arrays represent each snake segment position in {column, row} from the left and top of the screen.
+/// @param[in] food as an integer array. integer array represents the food position in {column, row} from the left and top of the screen.
+/// @return
+/// @todo pass snake and food by const reference instead of by value to improve performance.
 ///
 void Printer::RefreshGameSpace(std::list<std::array<int, 2>> snake, std::array<int, 2> food) {
 
@@ -136,10 +136,10 @@ void Printer::RefreshGameSpace(std::list<std::array<int, 2>> snake, std::array<i
 }
 
 ///
-/// @brief: load the previous high score from the savefile. print the game start menu and receive user input.
-/// @param: none.
-/// @return: boolean true to start the game or boolean false if user quit the game.
-/// @todo: add input option to allow user to reset high score history.
+/// @brief load the previous high score from the savefile. print the game start menu and receive user input.
+/// @param
+/// @return boolean true to start the game or boolean false if user quit the game.
+/// @todo add input option to allow user to reset high score history.
 ///
 bool Printer::StartGame() {
     
@@ -214,10 +214,10 @@ bool Printer::StartGame() {
 }
 
 ///
-/// @brief: checks for a new high score and records new high score to savefile. prints the end menu.
-/// @param[in]: current game score as an integer; used to compare against the previous high score.
-/// @return: boolean true if user quit the game, boolean false to return to the start menu
-/// @todo: none.
+/// @brief checks for a new high score and records new high score to savefile. prints the end menu.
+/// @param[in] score as an integer; used to compare against the previous high score.
+/// @return boolean true if user quit the game, boolean false to return to the start menu
+/// @todo
 ///
 bool Printer::EndGame(int score) {
     
@@ -311,11 +311,11 @@ bool Printer::EndGame(int score) {
 }
 
 ///
-/// @brief: continuous loop while game is paused, waits for user to unpause the game.
-/// @brief: side effect is to remain in function until user presses unpause command.
-/// @param: none.
-/// @return: none. 
-/// @todo: none.
+/// @brief continuous loop while game is paused, waits for user to unpause the game.
+/// @brief side effect is to remain in function until user presses unpause command.
+/// @param
+/// @return 
+/// @todo
 ///
 void Printer::Pause() {
 
@@ -333,10 +333,10 @@ void Printer::Pause() {
 }
 
 ///
-/// @brief: prints message to alert to user the program is exiting.
-/// @param: none.
-/// @return: none.
-/// @todo: none.
+/// @brief prints message to alert to user the program is exiting.
+/// @param
+/// @return
+/// @todo
 ///
 void Printer::Exit() {
 
@@ -354,10 +354,10 @@ void Printer::Exit() {
 }
 
 ///
-/// @brief: gets the user input during the main game loop. user can change direction of the snake, pause the game, or exit the game.
-/// @param: none.
-/// @return: integer represented by a user input enumerator.
-/// @todo: none.
+/// @brief gets the user input during the main game loop. user can change direction of the snake, pause the game, or exit the game.
+/// @param
+/// @return integer represented by a user input enumerator.
+/// @todo
 ///
 int Printer::GetDirection() {
 
@@ -397,10 +397,10 @@ int Printer::GetDirection() {
 }
 
 ///
-/// @brief: prints the game title window. does not update after initial print.
-/// @param: none.
-/// @return: none.
-/// @todo: none.
+/// @brief prints the game title window. does not update after initial print.
+/// @param
+/// @return
+/// @todo
 ///
 void Printer::PrintTitle() {
 
@@ -420,10 +420,10 @@ void Printer::PrintTitle() {
 }
 
 ///
-/// @brief: prints the current high score loaded in from the savefile.
-/// @param: none.
-/// @return: none.
-/// @todo: none.
+/// @brief prints the current high score loaded in from the savefile.
+/// @param
+/// @return
+/// @todo
 ///
 void Printer::PrintHighScore() {
 
@@ -443,10 +443,10 @@ void Printer::PrintHighScore() {
 }
 
 ///
-/// @brief: prints the score for the current game during the main gameloop.
-/// @param[in]: score for the current game as an integer.
-/// @return: none.
-/// @todo: none.
+/// @brief prints the score for the current game during the main gameloop.
+/// @param[in] score for the current game as an integer.
+/// @return
+/// @todo
 ///
 void Printer::PrintScore(int score) {
 
@@ -469,11 +469,11 @@ void Printer::PrintScore(int score) {
 }
 
 ///
-/// @brief: prints the main gameplay window once per frame to upate snake position.
-/// @param[in]: @see Printer::RefreshGameSpace()
-/// @param[in]: @see Printer::RefreshGameSpace()
-/// @return: none.
-/// @todo: @see Printer::RefreshGameSpace()
+/// @brief prints the main gameplay window once per frame to upate snake position.
+/// @param[in] snake @see Printer::RefreshGameSpace()
+/// @param[in] food @see Printer::RefreshGameSpace()
+/// @return
+/// @todo @see Printer::RefreshGameSpace()
 /// 
 void Printer::PrintGameSpace(std::list<std::array<int, 2>> snake, std::array<int, 2> food) {
 

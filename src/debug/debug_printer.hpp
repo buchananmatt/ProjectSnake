@@ -38,8 +38,8 @@ namespace bocan {
 namespace snake {
 
 /// @class DebugPrinter
-/// @brief Draws a debugging console window to the screen separate from the Printer screen windows.
-/// @brief Used to debug the game during early development. Not included in the release version of the game.
+/// @brief draws a debugging console window to the screen separate from the Printer screen windows.
+/// @brief used to debug the game during early development. Not included in the release version of the game.
 ///
 class DebugPrinter {
 

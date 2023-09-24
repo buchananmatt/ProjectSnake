@@ -36,9 +36,8 @@ namespace bocan {
 namespace snake {
 
 ///
-/// @enum: User Input
-/// @brief: enumerators to represent various states of user input.
-/// @todo: implement enum class here instead of enum.
+/// @brief enumerations to represent various states of user input.
+/// @todo implement enum class here instead of enum.
 ///
 enum user_input {
     QUIT = 0,
@@ -54,10 +53,10 @@ enum user_input {
 };
 
 ///
-/// @class: Printer
-/// @brief: provides the interface between the Game and the user. prints game elements to the screen and receives keyboard input from the user.
-/// @brief: acts as the interface with the ncurses library. responsible for reading and writing information to the savefile.
-/// @todo: class object is currently allocated in Game on the heap. refactor to allocate on the stack and have direct access to Game private members.
+/// @class Printer
+/// @brief provides the interface between the Game and the user. prints game elements to the screen and receives keyboard input from the user.
+/// @brief acts as the interface with the ncurses library. responsible for reading and writing information to the savefile.
+/// @todo class object is currently allocated in Game on the heap. refactor to allocate on the stack and have direct access to Game private members.
 ///
 class Printer {
 public:
